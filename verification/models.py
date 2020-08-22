@@ -5,6 +5,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
+from django.core.validators import MinLengthValidator
 
 
 class CustomUserManager(BaseUserManager):
@@ -43,10 +44,11 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     age = models.PositiveIntegerField(blank=False, default=0)
-    sport = models.ForeignKey()
-    state = models.CharField(blank=False, max_length=256, default="none")
+    sport = models.ForeignKey(to='Sport', on_delete=models.PROTECT)
+    state = models.ForeignKey(to='State', on_delete=models.PROTECT)
+    highest_qualification = models.CharField(default="none", max_length=256)
+    union_territory = models.ForeignKey(to="UnionTerritory", on_delete=models.PROTECT)
     is_staff = models.BooleanField(default=False)
-    highest_qualification = models.CharField(default="none")
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
@@ -63,24 +65,43 @@ class Sport(models.Model):
     """
     Sport model will store various sports played.
     """
-    sport = models.CharField()
+    sport = models.CharField(max_length=256,
+                             null=True,
+                             validators=[MinLengthValidator(2, "minimum length should be greater than 2")])
+
+    def __str__(self):
+        return self.sport
+
+    class Meta:
+        db_table = "sport"
 
 
 class State(models.Model):
     """
     State model stores various states in india
     """
-    state = models.CharField()
+    state = models.CharField(max_length=256,
+                             default="None",
+                             null=True,
+                             validators=[MinLengthValidator(2, "minimum length should be greater than 2")])
 
     def __str__(self):
         return self.state
+
+    class Meta:
+        db_table = "state"
 
 
 class UnionTerritory(models.Model):
     """
     UnionTerritory models store various union territory in india
     """
-    UnionTerritory = models.CharField()
+    Union_territory = models.CharField(max_length=256,
+                                       null=True,
+                                       validators=[MinLengthValidator(2, "minimum length should be greater than 2")])
 
     def __str__(self):
-        return self.UnionTerritory
+        return self.Union_territory
+
+    class Meta:
+        db_table = "unionterritories"

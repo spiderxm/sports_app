@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import uuid
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -75,14 +75,14 @@ WSGI_APPLICATION = 'sports_selection_app.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'sports_data',
-    'HOST': '54.236.47.107',
-    'PORT': '3306',
-    'USER': 'root',
-    'PASSWORD': '4eBkh,qSB[bAX8gy',
-}}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sports_data',
+        'HOST': '54.236.47.107',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': '4eBkh,qSB[bAX8gy',
+    }}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -107,7 +107,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
+
+LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "/"
 
 USE_I18N = True
 
@@ -120,6 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CRISPY_TEMPLATE_PACK="bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTH_USER_MODEL = 'verification.CustomUser'

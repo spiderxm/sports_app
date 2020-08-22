@@ -9,4 +9,4 @@ class Register(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'age', 'state', 'sport']
+        fields = ['email', 'age', 'state', 'sport', 'union_territory']
