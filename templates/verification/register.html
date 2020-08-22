@@ -1,0 +1,17 @@
+{% extends "partials/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="margin:10rem">
+        <h1>Create an Account on sports Sports Selection Platforms</h1>
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
