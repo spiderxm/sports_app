@@ -7,8 +7,14 @@
     <div style="margin:10rem">
         <h1>Create an Account on sports Sports Selection Platforms</h1>
         <form method="POST" class="form-group">
+        {% if message %}
+            <p style="color: red">{{ message }}</p>
+        {% endif %}
             {% csrf_token %}
             {% bootstrap_form form %}
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="6LfcX8IZAAAAAIdN6xTennWyz8YgTEUkEJVxbrie" style="margin-bottom: 1rem"></div>
+
             {% buttons %}
                 <button type="submit" class="btn btn-primary">Submit</button>
             {% endbuttons %}

@@ -24,7 +24,7 @@ SECRET_KEY = '^^i95syv3*g8aoe!yg=og+(l9pt+n#v29g$fq4f4@u#dk&wuc-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sports_data',
-        'HOST': '54.236.47.107',
+        'HOST': 'sports.ciwe3trzqlhw.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': '4eBkh,qSB[bAX8gy',
@@ -110,6 +110,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
 
+LOGIN_URL = '/auth/login'
+
 LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/"
@@ -136,3 +138,5 @@ EMAIL_HOST_USER = 'sports.registraion@gmail.com'
 EMAIL_HOST_PASSWORD = '4eBkh,qSB[bAX8gy'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+GOOGLE_RECAPTCHA_SECRET_KEY = "6LfcX8IZAAAAAImCNnUCle86SFZwc6w1JdDE0uN_"
