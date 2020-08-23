@@ -14,19 +14,20 @@ class CustomUserManager(BaseUserManager):
     for authentication instead of usernames.
     """
 
-    def create_user(self, email, age, sport, state, password, **extra_fields):
+    def create_user(self, email, first_name, last_name, age, sport, state, password, **extra_fields):
         """
         Create and save a User with the given email, password and given details
         """
         if not email:
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
-        user = self.model(email=email, sport=sport, state=state, age=age ** extra_fields)
+        user = self.model(email=email, first_name=first_name, last_name=last_name, sport=sport, state=state, age=age,
+                          **extra_fields)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, age, sport, state, password, **extra_fields):
+    def create_superuser(self, email, first_name, last_name, age, sport, state, password, **extra_fields):
         """
         Create and save a SuperUser with the given email, password and details.
         """
@@ -38,16 +39,21 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
-        return self.create_user(email, age, sport, state, password, **extra_fields)
+        return self.create_user(email, first_name, last_name, age, sport, state, password, **extra_fields)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom User Model - for registering user
+    """
     email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(max_length=256, default=None,validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
+    last_name = models.CharField(max_length=256, default=None,validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
     age = models.PositiveIntegerField(blank=False, default=0)
     sport = models.ForeignKey(to='Sport', on_delete=models.PROTECT)
     state = models.ForeignKey(to='State', on_delete=models.PROTECT)
     highest_qualification = models.CharField(default="none", max_length=256)
-    union_territory = models.ForeignKey(to="UnionTerritory", on_delete=models.PROTECT)
+    # union_territory = models.ForeignKey(to="UnionTerritory", on_delete=models.PROTECT)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)

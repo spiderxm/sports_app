@@ -9,4 +9,9 @@ class Register(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'age', 'state', 'sport', 'union_territory']
+        fields = ['email', 'first_name', 'last_name', 'age', 'state', 'sport']
+
+
+class Login(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput())
