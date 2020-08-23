@@ -53,7 +53,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     sport = models.ForeignKey(to='Sport', on_delete=models.PROTECT)
     state = models.ForeignKey(to='State', on_delete=models.PROTECT)
     highest_qualification = models.CharField(default="none", max_length=256)
-    # union_territory = models.ForeignKey(to="UnionTerritory", on_delete=models.PROTECT)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)

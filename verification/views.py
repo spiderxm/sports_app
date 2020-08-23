@@ -1,13 +1,38 @@
-from django.shortcuts import render, HttpResponse
+from django.contrib.auth import authenticate
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from verification.forms import Register, Login
 from django.core.mail import send_mail
+from django.contrib.auth import login as auth_login
+from django.urls import reverse_lazy
 
-
-# Create your views here.
 def login(request):
-    form = Login()
-    
-    return HttpResponse("login")
+    if request.method == "GET":
+        context = {
+            "form": Login()
+        }
+        return render(request, "verification/login.html", context)
+    if request.method == "POST":
+        form = Login(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = authenticate(email=email, password=password)
+            if user:
+                print (user)
+                auth_login(request, user)
+                return HttpResponseRedirect(reverse_lazy('/'))
+            else:
+                context = {
+                    "form": Login(request.POST),
+                    "message": "Invalid Credetials Provided"
+                }
+                return render(request, "verification/login.html", context)
+
+        else:
+            context = {
+                "form": form
+            }
+            return render(request, "verification/login.html", context)
 
 
 def register(request):
