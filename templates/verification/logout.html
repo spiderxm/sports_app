@@ -9,7 +9,7 @@
 
         <form method="POST" class="form-group">
             {% csrf_token %}
-            <h1> {{ user.first_name }} {{ user.last_names }} are you sure you want to logout?</h1>
+            <h1> {{ user.first_name }} {{ user.last_name }} are you sure you want to logout?</h1>
             {% buttons %}
                 <button type="reset" class="btn btn-primary">Cancel</button>
                 <button type="submit" class="btn btn-primary">Logout</button>

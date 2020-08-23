@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from verification.forms import Register, Login
 from django.core.mail import send_mail
 from django.contrib.auth import login as auth_login, logout
@@ -24,7 +24,24 @@ def login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                return HttpResponseRedirect(reverse_lazy('home:home'))
+                message = "Login was made in to your account from following user agent {}".format(
+                    request.headers['User-Agent'])
+                try:
+                    send_mail(
+                    'Login into Sports Registration Application',
+                    message,
+                    'sports.registraion@gmail.com',  # Admin
+                    [
+                        email
+                    ],
+                    fail_silently=False
+                    )
+                except Exception as e:
+                    print (e)
+                    pass
+                if request.GET.get("next"):
+                    return redirect(request.GET.get("next"))
+                return redirect('/home')
             else:
                 context = {
                     "form": Login(request.POST),
@@ -79,7 +96,8 @@ def register(request):
                 except Exception as e:
                     print (e)
             else:
-                return render(request, "verification/register.html", {"form": form, "message": "Invalid reCAPTCHA. Please try again."})
+                return render(request, "verification/register.html",
+                              {"form": form, "message": "Invalid reCAPTCHA. Please try again."})
 
         else:
             return render(request, "verification/register.html", {"form": form})

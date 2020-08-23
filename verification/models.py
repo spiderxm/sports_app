@@ -112,3 +112,11 @@ class UnionTerritory(models.Model):
 
     class Meta:
         db_table = "unionterritories"
+
+
+class ProfilePicture(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    image = models.ImageField(default="default.jpg", upload_to='profile_pics')
+
+    def __str__(self):
+        return '{} Profile Picture'.format(self.user.email)
