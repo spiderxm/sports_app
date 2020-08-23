@@ -2,10 +2,12 @@ from django.contrib.auth import authenticate
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from verification.forms import Register, Login
 from django.core.mail import send_mail
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
-def login(request):
+
+def Login(request):
     if request.method == "GET":
         context = {
             "form": Login()
@@ -20,7 +22,7 @@ def login(request):
             if user:
                 print (user)
                 auth_login(request, user)
-                return HttpResponseRedirect(reverse_lazy('/'))
+                return HttpResponseRedirect(reverse_lazy('home:home'))
             else:
                 context = {
                     "form": Login(request.POST),
@@ -72,3 +74,11 @@ def register(request):
     else:
         form = Register
         return render(request, "verification/register.html", {"form": form})
+
+@login_required
+def Logout(request):
+    if request.method == "POST":
+        logout(request)
+        return HttpResponseRedirect(reverse_lazy('home:home'))
+    else:
+        return render(request, 'verification/logout.html', context={})

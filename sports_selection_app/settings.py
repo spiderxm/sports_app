@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'crispy_forms',
     'verification',
+    'home_app',
     "bootstrap4",
     'django.contrib.admin',
     'django.contrib.auth',

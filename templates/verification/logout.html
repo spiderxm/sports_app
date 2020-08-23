@@ -1,0 +1,19 @@
+{% extends "partials/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="margin:10rem">
+        <h1>Logout</h1>
+
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            <h1> {{ user.first_name }} {{ user.last_names }} are you sure you want to logout?</h1>
+            {% buttons %}
+                <button type="reset" class="btn btn-primary">Cancel</button>
+                <button type="submit" class="btn btn-primary">Logout</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

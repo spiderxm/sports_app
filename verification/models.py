@@ -47,8 +47,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Custom User Model - for registering user
     """
     email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(max_length=256, default=None,validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
-    last_name = models.CharField(max_length=256, default=None,validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
+    first_name = models.CharField(max_length=256, default=None,
+                                  validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
+    last_name = models.CharField(max_length=256, default=None,
+                                 validators=[MinLengthValidator(2, "Minimum length should be greater than 2")])
     age = models.PositiveIntegerField(blank=False, default=0)
     sport = models.ForeignKey(to='Sport', on_delete=models.PROTECT)
     state = models.ForeignKey(to='State', on_delete=models.PROTECT)
