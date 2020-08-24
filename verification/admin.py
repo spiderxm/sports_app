@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import CustomUser, Sport, State, UnionTerritory
+from .models import CustomUser, Sport, State, UnionTerritory, ProfilePicture
 
-# Register your models here.
+# Register your models here into admin
 admin.site.register([
     CustomUser,
     Sport,
     UnionTerritory,
-    State
+    State,
+    ProfilePicture
 ])
