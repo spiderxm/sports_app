@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+    <div style="width: 100vw;height: 100vh ">
+        <div class="card" style="width: 18rem; margin: 100px auto ">
+            <img class="card-img-top" src="{{ image_url }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ first_name }} {{ last_name }}</h5>
+                <p class="card-text">{{ email }}</p>
+                <p class="card-text">Age : {{ age }}</p>
+                <p class="card-text">Sport : {{ sport }}</p>
+                <p class="card-text">State : {{ state }}</p>
+                <p class="card-text">Gender : {{ gender }}</p>
+            </div>
+            {% if user.id == id %}
+                <a href="{% url 'upload_photo' id %}">
+                <button class="btn btn-primary">Update Profile</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

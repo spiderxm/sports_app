@@ -1,0 +1,14 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+    <h1>{{ user.email }}</h1>
+    <h2>{{ user.first_name }} {{ user.lastname }}</h2>
+    <form action="" method="post">
+    {% csrf_token %}
+        <input type="number" value="{{ user.id }}" hidden>
+        <input type="file" name="myImage" accept="image/x-png,image/gif,image/jpeg" required/>
+        <button type="button">Cancel</button>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

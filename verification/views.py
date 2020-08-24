@@ -24,21 +24,21 @@ def login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                message = "Login was made in to your account from following user agent {}".format(
-                    request.headers['User-Agent'])
-                try:
-                    send_mail(
-                    'Login into Sports Registration Application',
-                    message,
-                    'sports.registraion@gmail.com',  # Admin
-                    [
-                        email
-                    ],
-                    fail_silently=False
-                    )
-                except Exception as e:
-                    print (e)
-                    pass
+                # message = "Login was made in to your account from following user agent {}".format(
+                #     request.headers['User-Agent'])
+                # try:
+                #     send_mail(
+                #     'Login into Sports Registration Application',
+                #     message,
+                #     'sports.registraion@gmail.com',  # Admin
+                #     [
+                #         email
+                #     ],
+                #     fail_silently=False
+                #     )
+                # except Exception as e:
+                #     print (e)
+                #     pass
                 if request.GET.get("next"):
                     return redirect(request.GET.get("next"))
                 return redirect('/home')
