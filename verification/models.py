@@ -129,3 +129,19 @@ class ProfilePicture(models.Model):
 
     def __str__(self):
         return '{} Profile Picture'.format(self.user.email)
+
+
+# Create your models here.
+class user_achievements(models.Model):
+    '''
+    Model to store details of users
+    '''
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    Name_of_Tournament = models.CharField(max_length=256, default="", null=False)
+    date = models.DateField(null=False)
+    Venue = models.CharField(max_length=256, null=False)
+    Event = models.CharField(max_length=256, null=False)
+    Medal_won = models.CharField(max_length=256, null=False)
+
+    def __str__(self):
+        return self.user + self.Event

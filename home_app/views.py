@@ -4,14 +4,12 @@ from verification.models import Sport
 
 
 # Create your views here.
-@login_required
 def index(request):
     return render(request, "home/home.html")
 
 
 def sport(request):
     sports = Sport.objects.all()
-    print (sports)
     context = {
         "sports": sports
     }

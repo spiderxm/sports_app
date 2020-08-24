@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect, Http404, HttpResponseRedirect
 from verification.models import CustomUser, ProfilePicture
+from user_profile.forms import Achievement
 from django.urls import reverse
+from verification.models import user_achievements
 
 
 def profile(request, _id):
@@ -18,6 +20,7 @@ def profile(request, _id):
     }
     try:
         context["image_url"] = profile.profilepicture.image.url
+        context["image_url"] = context["image_url"].split("?")[0]
     except:
         context["image_url"] = "https://storage.cloud.google.com/mrigankbucket/default.png"
     return render(request, "user_profile/user_profile.html", context=context)
@@ -43,5 +46,23 @@ def upload_photo(request, _id):
                 picture.image = request.FILES["image"]
                 picture.save()
             return HttpResponseRedirect('/user_profile/{}/'.format(_id))
+    else:
+        raise Http404("Page not found")
+
+
+@login_required
+def add_achievement(request, _id):
+    if str(request.user.id) == str(_id):
+        if request.method == "GET":
+            form = Achievement()
+            return render(request, "user_profile/add_achievements.html", {"form": form})
+
+        if request.method == "POST":
+            form = Achievement(request.POST)
+            if form.is_valid():
+                # achievement = user_achievements(user=request.user, )
+                return HttpResponseRedirect('/user_profile/{}/'.format(_id))
+            else:
+                return render(request, "user_profile/add_achievements.html", {"form": form})
     else:
         raise Http404("Page not found")

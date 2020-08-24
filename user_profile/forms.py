@@ -1,5 +1,8 @@
 from django import forms
+from verification.models import user_achievements
 
 
-class Form(forms.Form):
-    image = forms.ImageField()
+class Achievement(forms.ModelForm):
+    class Meta:
+        model = user_achievements
+        exclude = ['user']

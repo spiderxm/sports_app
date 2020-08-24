@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from verification import views
-from django.urls import path
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 
 urlpatterns = [
     url('login/', views.login, name="login"),
@@ -14,4 +14,7 @@ urlpatterns = [
     url(r'^password-reset-confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         PasswordResetConfirmView.as_view(template_name="verification/password_reset_confirm.html"),
         name="password_reset_confirm"),
+    url(r'^password-reset-complete/$',
+        PasswordResetCompleteView.as_view(template_name="verification/password_reset_complete.html"),
+        name="password_reset_complete")
 ]

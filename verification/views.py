@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import requests
-import json
+import time
 
 
 def login(request):
@@ -17,6 +17,7 @@ def login(request):
         }
         return render(request, "verification/login.html", context)
     if request.method == "POST":
+        a = time.time()
         form = Login(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -24,24 +25,11 @@ def login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                # message = "Login was made in to your account from following user agent {}".format(
-                #     request.headers['User-Agent'])
-                # try:
-                #     send_mail(
-                #         'Login into Sports Registration Application',
-                #         message,
-                #         'sports.registraion@gmail.com',  # Admin
-                #         [
-                #             email
-                #         ],
-                #         fail_silently=False
-                #     )
-                # except Exception as e:
-                #     print (e)
-                #     pass
+                print ("logged in ")
+                print(time.time() - a)
                 if request.GET.get("next"):
                     return redirect(request.GET.get("next"))
-                return redirect('/home')
+                return HttpResponseRedirect(reverse_lazy('home:home'))
             else:
                 context = {
                     "form": Login(request.POST),

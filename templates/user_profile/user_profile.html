@@ -33,7 +33,20 @@
                     </a>
                 {% endif %}
             </div>
-
+            <div>
+                <a href="{% url 'add_achievement' user.id %}">
+                    Add Achievement
+                </a>
+            </div>
         </div>
     </div>
+    {% if achievements %}
+        <div>
+            Details of sports achievements during the previous years: -
+        </div>
+    {% else %}
+        <div>
+            No Acheivements listed by you.
+        </div>
+    {% endif %}
 {% endblock %}

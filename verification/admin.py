@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Sport, State, UnionTerritory, ProfilePicture
+from .models import CustomUser, Sport, State, UnionTerritory, ProfilePicture, user_achievements
 
 # Register your models here into admin
 admin.site.register([
@@ -7,5 +7,6 @@ admin.site.register([
     Sport,
     UnionTerritory,
     State,
-    ProfilePicture
+    ProfilePicture,
+    user_achievements
 ])
