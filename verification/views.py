@@ -28,13 +28,13 @@ def login(request):
                 #     request.headers['User-Agent'])
                 # try:
                 #     send_mail(
-                #     'Login into Sports Registration Application',
-                #     message,
-                #     'sports.registraion@gmail.com',  # Admin
-                #     [
-                #         email
-                #     ],
-                #     fail_silently=False
+                #         'Login into Sports Registration Application',
+                #         message,
+                #         'sports.registraion@gmail.com',  # Admin
+                #         [
+                #             email
+                #         ],
+                #         fail_silently=False
                 #     )
                 # except Exception as e:
                 #     print (e)

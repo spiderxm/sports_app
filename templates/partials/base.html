@@ -12,6 +12,32 @@
     {% endblock %}
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">Sports Platform</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a href="{% url 'home:home' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'home:sports' %}" class="nav-item nav-link">Sports</a>
+            {% if user.id %}
+                <a href="{% url 'user_profile' user.id %}" class="nav-item nav-link">User Profile</a>
+                <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+            {% endif %}
+        </div>
+        {% if search %}
+            <form class="form-inline ml-auto">
+                <input type="text" class="form-control mr-sm-2" placeholder="Search">
+                <button type="submit" class="btn btn-outline-light">Search</button>
+            </form>
+        {% endif %}
+    </div>
+</nav>
 {% block content %}
 {% endblock %}
 

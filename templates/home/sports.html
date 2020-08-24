@@ -1,0 +1,10 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+    <div style="margin-top: 2rem ">
+    <h1>LIST OF RECOGNISED NATIONAL SPORTS FEDERATIONS FOR THE YEAR 2019</h1>
+    {% for sport in sports %}
+        <span class="badge badge-info"  style="margin: 5px; padding: 20px; font-size: 20px; border-radius: 20px">{{ sport.sport }}</span>
+    {% endfor %}
+    </div>
+{% endblock %}

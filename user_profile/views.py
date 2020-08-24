@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from verification.models import CustomUser
+from django.shortcuts import render, get_object_or_404, redirect, Http404, HttpResponseRedirect
+from verification.models import CustomUser, ProfilePicture
+from django.urls import reverse
 
 
-# Create your views here.
-@login_required
 def profile(request, _id):
     profile = get_object_or_404(CustomUser, pk=_id)
     context = {
@@ -26,10 +25,23 @@ def profile(request, _id):
 
 @login_required
 def upload_photo(request, _id):
-    if request.method == "GET":
-        return render(request, "user_profile/upload_photo.html")
+    if str(request.user.id) == str(_id):
+        if request.method == "GET":
+            return render(request, "user_profile/upload_photo.html")
 
+        if request.method == "POST":
+            data = request.POST
+            previous_picture = ProfilePicture.objects.all().filter(user=request.user)
+            try:
+                if previous_picture[0]:
+                    previous_picture = previous_picture[0]
+                    previous_picture.image = request.FILES["image"]
+                    previous_picture.save()
+                    print (previous_picture.user)
+            except:
+                picture = ProfilePicture(user=request.user)
+                picture.image = request.FILES["image"]
+                picture.save()
+            return HttpResponseRedirect('/user_profile/{}/'.format(_id))
     else:
-        data = request.POST
-        print(data)
-        return redirect('user_profile/' + request.user.id + '/')
+        raise Http404("Page not found")
