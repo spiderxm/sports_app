@@ -44,6 +44,25 @@
         <div>
             Details of sports achievements during the previous years: -
         </div>
+        {% for acievement in achievements %}
+            <div>
+            <h1>
+                {{ acievement.date }}
+            </h1>
+            <h2>
+                {{ acievement.Event }}
+            </h2>
+            <h3>
+                {{ acievement.Venue }}
+            </h3>
+            <h4>
+                {{ acievement.Name_of_Tournament }}
+            </h4>
+            <h5>
+                {{ acievement.Medal_won }}
+            </h5>
+            </div>
+        {% endfor %}
     {% else %}
         <div>
             No Acheivements listed by you.

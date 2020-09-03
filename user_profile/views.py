@@ -17,7 +17,13 @@ def profile(request, _id):
         "email": profile.email,
         "gender": profile.gender,
         "id": profile.id,
+        "achievements": None
     }
+    achievements = user_achievements.objects.all().filter(pk=_id)
+    if len(achievements) > 0:
+        context["achievements"] = achievements
+
+
     try:
         context["image_url"] = profile.profilepicture.image.url
         context["image_url"] = context["image_url"].split("?")[0]
@@ -60,9 +66,21 @@ def add_achievement(request, _id):
         if request.method == "POST":
             form = Achievement(request.POST)
             if form.is_valid():
-                # achievement = user_achievements(user=request.user, )
+                date = form.cleaned_data["date"]
+                tournament = form.cleaned_data["Name_of_Tournament"]
+                venue = form.cleaned_data["Venue"]
+                event = form.cleaned_data["Event"]
+                Medal_won = form.cleaned_data["Medal_won"]
+                achievement = user_achievements(user=request.user,
+                                                date=date,
+                                                Name_of_Tournament=tournament,
+                                                Venue=venue,
+                                                Event=event,
+                                                Medal_won=Medal_won)
+                achievement.save()
                 return HttpResponseRedirect('/user_profile/{}/'.format(_id))
             else:
+
                 return render(request, "user_profile/add_achievements.html", {"form": form})
     else:
         raise Http404("Page not found")

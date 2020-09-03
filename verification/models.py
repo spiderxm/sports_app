@@ -144,4 +144,4 @@ class user_achievements(models.Model):
     Medal_won = models.CharField(max_length=256, null=False)
 
     def __str__(self):
-        return self.user + self.Event
+        return self.user.email + ''' ''' +self.Event

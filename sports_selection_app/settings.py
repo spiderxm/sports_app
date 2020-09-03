@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'verification',
     'storages',
     'user_profile',
+    'bootstrap_datepicker_plus',
     'home_app',
     "bootstrap4",
     'django.contrib.admin',
@@ -157,4 +158,8 @@ AWS_S3_FILE_OVERWRITE = False
 
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
+}
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
 }
