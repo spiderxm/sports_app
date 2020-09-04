@@ -1,6 +1,5 @@
 Django
 django-appconf
-django-bootstrap-datepicker-plus
 django-bootstrap4
 django-crispy-forms
 django-extensions
@@ -12,3 +11,4 @@ djangorestframework
 mysql-connector-python
 mysqlclient
 requests
+django-bootstrap-datepicker-plus
