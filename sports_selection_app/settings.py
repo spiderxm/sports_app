@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'verification',
     'storages',
     'user_profile',
-    'bootstrap_datepicker_plus',
     'home_app',
     "bootstrap4",
     'django.contrib.admin',

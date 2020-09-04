@@ -12,5 +12,4 @@ mysql-connector-python
 mysqlclient
 requests
 django-crispy-forms
-django-bootstrap-datepicker-plus
 Pillow
