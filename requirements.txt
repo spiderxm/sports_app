@@ -11,4 +11,3 @@ djangorestframework
 mysql-connector-python
 mysqlclient
 requests
-django-bootstrap-datepicker-plus
