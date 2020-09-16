@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, Http404, HttpResponseRed
 from verification.models import CustomUser, ProfilePicture
 from user_profile.forms import Achievement, Certificate
 from django.urls import reverse_lazy
-from verification.models import user_achievements, user_certificates
+from verification.models import user_achievements, Certificates
 
 
 def profile(request, _id):
@@ -95,7 +95,7 @@ def add_certificate(request, _id):
         if request.method == "POST":
             form = Certificate(request.POST, request.FILES)
             if form.is_valid():
-                certificate = user_certificates.objects.create(
+                certificate = Certificates.objects.create(
                     user=request.user,
                     message=request.POST['message'],
                     certificate=request.FILES['certificate']

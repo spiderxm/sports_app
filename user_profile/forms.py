@@ -1,7 +1,6 @@
 from django import forms
 from verification.models import user_achievements
-from verification.models import user_certificates
-
+from verification.models import Certificates
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -18,5 +17,5 @@ class Achievement(forms.ModelForm):
 
 class Certificate(forms.ModelForm):
     class Meta:
-        model = user_certificates
+        model = Certificates
         exclude = ['user']

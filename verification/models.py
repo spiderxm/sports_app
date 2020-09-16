@@ -149,13 +149,16 @@ class user_achievements(models.Model):
         return self.user.email + ''' ''' + self.Event
 
 
-class user_certificates(models.Model):
+class Certificates(models.Model):
     '''
     Model to store certificates of user
     '''
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     message = models.TextField()
     certificate = models.FileField(upload_to='certificates')
+    createdOn = models.DateTimeField(auto_now_add=True)
+    lastUpdatedOn = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{} Certificate'.format(self.user.email)
+        return '{} Certificate {}'.format(self.user.email, self.message)
+
