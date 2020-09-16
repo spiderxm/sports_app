@@ -124,6 +124,9 @@ class UnionTerritory(models.Model):
 
 
 class ProfilePicture(models.Model):
+    '''
+    Model to store profile picture of user
+    '''
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(default="default.jpg", upload_to='profile_pics')
 
@@ -131,10 +134,9 @@ class ProfilePicture(models.Model):
         return '{} Profile Picture'.format(self.user.email)
 
 
-# Create your models here.
 class user_achievements(models.Model):
     '''
-    Model to store details of users
+    Model to store achievements of users
     '''
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     Name_of_Tournament = models.CharField(max_length=256, default="", null=False)
@@ -144,4 +146,16 @@ class user_achievements(models.Model):
     Medal_won = models.CharField(max_length=256, null=False)
 
     def __str__(self):
-        return self.user.email + ''' ''' +self.Event
+        return self.user.email + ''' ''' + self.Event
+
+
+class user_certificates(models.Model):
+    '''
+    Model to store certificates of user
+    '''
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    message = models.TextField()
+    certificate = models.FileField(upload_to='certificates')
+
+    def __str__(self):
+        return '{} Certificate'.format(self.user.email)

@@ -9,7 +9,9 @@ django-storages
 django-widget-tweaks
 djangorestframework
 mysql-connector-python
+django-bootstrap-datepicker-plus
 mysqlclient
 requests
+boto3
 django-crispy-forms
 Pillow

@@ -155,9 +155,9 @@ AWS_S3_REGION_NAME = 'ap-south-1'
 AWS_DEFAULT_ACL = None
 AWS_S3_FILE_OVERWRITE = False
 
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
 
 BOOTSTRAP4 = {
     'include_jquery': True,

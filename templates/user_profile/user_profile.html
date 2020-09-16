@@ -33,10 +33,19 @@
                     </a>
                 {% endif %}
             </div>
-            <div>
-                <a href="{% url 'add_achievement' user.id %}">
-                    Add Achievement
-                </a>
+            <div style="text-align: center; margin: 10px">
+                {% if user.id == id %}
+                    <a href="{% url 'add_achievement' user.id %}">
+                        <button class="btn btn-primary">Add Achievement</button>
+                    </a>
+                {% endif %}
+            </div>
+            <div style="text-align: center; margin: 10px">
+                {% if user.id == id %}
+                    <a href="{% url 'add_certificate' user.id %}">
+                        <button class="btn btn-primary">Add Certificate</button>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -46,21 +55,21 @@
         </div>
         {% for acievement in achievements %}
             <div>
-            <h1>
-                {{ acievement.date }}
-            </h1>
-            <h2>
-                {{ acievement.Event }}
-            </h2>
-            <h3>
-                {{ acievement.Venue }}
-            </h3>
-            <h4>
-                {{ acievement.Name_of_Tournament }}
-            </h4>
-            <h5>
-                {{ acievement.Medal_won }}
-            </h5>
+                <h1>
+                    {{ acievement.date }}
+                </h1>
+                <h2>
+                    {{ acievement.Event }}
+                </h2>
+                <h3>
+                    {{ acievement.Venue }}
+                </h3>
+                <h4>
+                    {{ acievement.Name_of_Tournament }}
+                </h4>
+                <h5>
+                    {{ acievement.Medal_won }}
+                </h5>
             </div>
         {% endfor %}
     {% else %}

@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect, Http404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, Http404, HttpResponseRedirect
 from verification.models import CustomUser, ProfilePicture
-from user_profile.forms import Achievement
-from django.urls import reverse
-from verification.models import user_achievements
+from user_profile.forms import Achievement, Certificate
+from django.urls import reverse_lazy
+from verification.models import user_achievements, user_certificates
 
 
 def profile(request, _id):
@@ -19,11 +19,9 @@ def profile(request, _id):
         "id": profile.id,
         "achievements": None
     }
-    achievements = user_achievements.objects.all().filter(pk=_id)
+    achievements = user_achievements.objects.all().filter(user__email=context["email"])
     if len(achievements) > 0:
         context["achievements"] = achievements
-
-
     try:
         context["image_url"] = profile.profilepicture.image.url
         context["image_url"] = context["image_url"].split("?")[0]
@@ -46,7 +44,7 @@ def upload_photo(request, _id):
                     previous_picture = previous_picture[0]
                     previous_picture.image = request.FILES["image"]
                     previous_picture.save()
-                    print (previous_picture.user)
+                    print(previous_picture.user)
             except:
                 picture = ProfilePicture(user=request.user)
                 picture.image = request.FILES["image"]
@@ -78,9 +76,35 @@ def add_achievement(request, _id):
                                                 Event=event,
                                                 Medal_won=Medal_won)
                 achievement.save()
+                print(achievement)
                 return HttpResponseRedirect('/user_profile/{}/'.format(_id))
             else:
 
                 return render(request, "user_profile/add_achievements.html", {"form": form})
+    else:
+        raise Http404("Page not found")
+
+
+@login_required
+def add_certificate(request, _id):
+    if str(request.user.id) == str(_id):
+        if request.method == "GET":
+            form = Certificate()
+            return render(request, "user_profile/add_certificates.html", {"form": form})
+
+        if request.method == "POST":
+            form = Certificate(request.POST, request.FILES)
+            if form.is_valid():
+                certificate = user_certificates.objects.create(
+                    user=request.user,
+                    message=request.POST['message'],
+                    certificate=request.FILES['certificate']
+                )
+                print(certificate)
+                certificate.save()
+                return HttpResponseRedirect('/user_profile/{}/'.format(_id))
+            else:
+                print(form.errors)
+                return render(request, "user_profile/add_certificates.html", {"form": form})
     else:
         raise Http404("Page not found")
