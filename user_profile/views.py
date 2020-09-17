@@ -23,6 +23,7 @@ def profile(request, _id):
         trials_applied_to = Application.objects.all().filter(user=request.user)
         if len(trials_applied_to) == 0:
             context['trials_applied_to'] = None
+            context['noshow'] = True
         context['trials_applied_to'] = trials_applied_to
     else:
         context['noshow'] = True

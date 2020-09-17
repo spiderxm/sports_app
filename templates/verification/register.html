@@ -4,20 +4,28 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div style="margin:10rem">
-        <h1>Create an Account on sports Sports Selection Platforms</h1>
-        <form method="POST" class="form-group">
-            {% if message %}
-                <p style="color: red">{{ message }}</p>
-            {% endif %}
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <script src='https://www.google.com/recaptcha/api.js'></script>
-            <div class="g-recaptcha" data-sitekey="6LfcX8IZAAAAAIdN6xTennWyz8YgTEUkEJVxbrie"
-                 style="margin-bottom: 1rem"></div>
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">Submit</button>
-            {% endbuttons %}
-        </form>
+    <div style="font-family: monospace">
+        <div style="margin: 0 auto; width: 500px; margin-top: 10vh;margin-bottom: 1rem; padding: .5rem;  box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
+            <form method="POST" class="form-group">
+                <div class="modal-header">
+                    <h1>Sign Up</h1>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% if message %}
+                        <p style="color: orangered"> {{ message }}</p>
+                    {% endif %}
+                    {% bootstrap_form form %}
+                    <p>Have an Account: <a href="{% url 'login' %}">Log-in</a></p>
+                </div>
+                <div class="modal-footer">
+                    {% buttons %}
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
     </div>
+
 {% endblock %}

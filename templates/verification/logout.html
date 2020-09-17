@@ -4,16 +4,28 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div style="margin:10rem">
-        <h1>Logout</h1>
+    <div style="height: 90vh; font-family: monospace; padding:1rem">
+        <div style="margin: 0 auto; width: 500px; margin-top: 15vh; padding: .5rem; box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem;">
+            <form method="POST" class="form-group">
+                <div class="modal-header">
+                    <h1>Logout</h1>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% if message %}
+                        <p style="color: orangered"> {{ message }}</p>
+                    {% endif %}
+                    <p style="font-size: 1rem"> {{ user.first_name }} {{ user.last_name }} are you sure you want to
+                        Logout? </p>
+                </div>
 
-        <form method="POST" class="form-group">
-            {% csrf_token %}
-            <h1> {{ user.first_name }} {{ user.last_name }} are you sure you want to logout?</h1>
-            {% buttons %}
-                <button type="reset" class="btn btn-primary">Cancel</button>
-                <button type="submit" class="btn btn-primary">Logout</button>
-            {% endbuttons %}
-        </form>
+                <div class="modal-footer">
+                    {% buttons %}
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
     </div>
+
 {% endblock %}

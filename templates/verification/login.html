@@ -4,22 +4,31 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div style="margin:10rem">
-        <h1>Login on Sports Selection Platform</h1>
+    <div style="height: 90vh; font-family: monospace ;padding: 1rem;">
+        <div style="margin: 0 auto; width: 450px; margin-top: 15vh; box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
+            <form method="POST" class="form-group">
+                <div class="modal-header">
+                    <h1>Login</h1>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% if message %}
+                        <p style="color: orangered"> {{ message }}</p>
+                    {% endif %}
+                    {% bootstrap_form form %}
+                    <p style="font-size: 14px">Forgot Password : <a href="{% url 'password_reset' %}">Reset</a></p>
+                    <p style="font-size: 14px">Don't have a account: <a href="{% url 'register' %}">Sign-up</a></p>
+                </div>
 
-        <form method="POST" class="form-group">
-            {% csrf_token %}
-            {% if message %}
-                <p style="color: orangered"> {{ message }}</p>
-            {% endif %}
-            {% bootstrap_form form %}
-            <p>Forgot Password: <a href="{% url 'password_reset' %}">Reset</a></p>
-            <p>Do not have a account ?: <a href="{% url 'register' %}"> Signup</a></p>
+                <div class="modal-footer">
+                    {% buttons %}
+                        <button type="reset" class="btn btn-primary pull-right">Reset</button>
+                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                    {% endbuttons %}
+                </div>
 
-            {% buttons %}
-                <button type="reset" class="btn btn-primary">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            {% endbuttons %}
-        </form>
+            </form>
+        </div>
     </div>
+
 {% endblock %}

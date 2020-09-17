@@ -5,19 +5,28 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
 {% block content %}
-    <div style="margin:10rem">
-        <h1>Add Trial for Sports Persons</h1>
-        <form method="POST" class="form-group">
-            {{ form.media }}
-            {% csrf_token %}
-            {% if message %}
-                <p style="color: orangered"> {{ message }}</p>
-            {% endif %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="reset" class="btn btn-primary">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            {% endbuttons %}
-        </form>
+    <div style="font-family: monospace">
+        <div style="margin: 0 auto; width: 500px; margin-top: 10vh;margin-bottom: 1rem; padding: .5rem;  box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
+             <form method="POST" class="form-group">
+                <div class="modal-header">
+                    <h1>Add Sports Trial</h1>
+                </div>
+                <div>
+                    {{ form.media }}
+                    {% csrf_token %}
+                    {% if message %}
+                        <p style="color: orangered"> {{ message }}</p>
+                    {% endif %}
+                    {% bootstrap_form form %}
+                </div>
+                <div class="modal-footer">
+                    {% buttons %}
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
     </div>
+
 {% endblock %}
