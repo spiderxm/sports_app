@@ -155,7 +155,7 @@ class Certificates(models.Model):
     """
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     message = models.TextField()
-    certificate = models.FileField(upload_to='certificates')
+    certificate = models.ImageField(upload_to='certificates')
     createdOn = models.DateTimeField(auto_now_add=True)
     lastUpdatedOn = models.DateTimeField(auto_now_add=True)
 

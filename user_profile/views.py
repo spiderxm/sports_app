@@ -44,6 +44,10 @@ def profile(request, _id):
         context["image_url"] = context["image_url"].split("?")[0]
     except:
         context["image_url"] = "https://storage.cloud.google.com/mrigankbucket/default.png"
+
+    Applications = Application.objects.all().filter(user_id=request.user.id)
+    context["applications"] = Applications
+    context["no_applications"] = len(Applications)
     return render(request, "user_profile/user_profile.html", context=context)
 
 

@@ -2085,7 +2085,7 @@
                                                      class="rounded-circle" style="height: 150px; width: 150px">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-email">
                                                     Achievements</label>
@@ -2094,13 +2094,22 @@
                                                        placeholder="{{ no_achievements }}" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-email">
                                                     Certificates</label>
                                                 <input type="email" id="input-email" style="color: black"
                                                        class="form-control form-control-alternative"
                                                        placeholder="{{ no_certificates }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">
+                                                    Applications</label>
+                                                <input type="email" id="input-email" style="color: black"
+                                                       class="form-control form-control-alternative"
+                                                       placeholder="{{ no_applications }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -2180,6 +2189,69 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% if achievements %}
+                                    <hr class="my-4">
+                                    <h6 class="heading-small text-muted mb-4">Achievements</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style="width:20% ">Tournament</th>
+                                                    <th scope="col" style="width:20% ">Date</th>
+                                                    <th scope="col" style="width:20% ">Event</th>
+                                                    <th scope="col" style="width:20% ">Venue</th>
+                                                    <th scope="col" style="width:20% ">Medal Won</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for achievement in achievements %}
+                                                    <tr>
+                                                        <td>{{ achievement.Name_of_Tournament }}</td>
+                                                        <td>{{ achievement.date }}</td>
+                                                        <td>{{ achievement.Event }}</td>
+                                                        <td>{{ achievement.Venue }}</td>
+                                                        <td>{{ achievement.Medal_won }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if certificates %}
+                                    <hr class="my-4">
+                                    <h6 class="heading-small text-muted mb-4">Certificates</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style="width:60% ">Message</th>
+                                                    <th scope="col" style="width:20% ">Document</th>
+                                                    <th scope="col" style="width:20% ">Uploaded At</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for certificate in certificates %}
+                                                    <tr>
+                                                        <td>{{ certificate.message }}</td>
+                                                        <td>
+                                                            <a href="https://sports-registration.s3.amazonaws.com/{{ certificate.certificate }}"
+                                                               target="new">
+                                                                <img src="https://sports-registration.s3.amazonaws.com/{{ certificate.certificate }}"
+                                                                     alt="" style="width: 100%">
+                                                            </a></td>
+                                                        <td>
+                                                            {{ certificate.createdOn }}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
                                 <hr class="my-4">
                             </form>
                         </div>
@@ -2188,53 +2260,5 @@
             </div>
         </div>
     </div>
-    {% if achievements %}
-        <div>
-            Details of sports achievements during the previous years: -
-        </div>
-        {% for acievement in achievements %}
-            <div>
-                <h1>
-                    {{ acievement.date }}
-                </h1>
-                <h2>
-                    {{ acievement.Event }}
-                </h2>
-                <h3>
-                    {{ acievement.Venue }}
-                </h3>
-                <h4>
-                    {{ acievement.Name_of_Tournament }}
-                </h4>
-                <h5>
-                    {{ acievement.Medal_won }}
-                </h5>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div>
-            No Acheivements listed by you.
-        </div>
-    {% endif %}
 
-    <div>
-        {% if noshow %}
-        {% else %}
-            {% if trials_applied_to %}
-                {% for trial in trials_applied_to %}
-                    <div class="card">
-                        <h1>{{ trial.trial.title }}</h1>
-                        <h3>Applied At {{ trial.date }}</h3>
-                        <a href="{% url 'trial_application_info' trial.trial.id %}">
-                            <button class=" btn-primary btn">
-                                Details
-                            </button>
-                        </a>
-                    </div>
-                {% endfor %}
-            {% else %}
-                Not Applied to Any Trials.
-            {% endif %}
-        {% endif %}
-    </div>
 {% endblock %}
