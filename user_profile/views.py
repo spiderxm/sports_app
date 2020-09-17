@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, Http404, HttpResponseRed
 from verification.models import CustomUser, ProfilePicture
 from user_profile.forms import Achievement, Certificate
 from django.urls import reverse_lazy
-from verification.models import user_achievements, Certificates, Trial
+from verification.models import user_achievements, Certificates, Application, DetailsOfApplication, Trial
 
 
 def profile(request, _id):
@@ -19,6 +19,13 @@ def profile(request, _id):
         "id": profile.id,
         "achievements": None
     }
+    if str(request.user.id) == str(_id):
+        trials_applied_to = Application.objects.all().filter(user=request.user)
+        if len(trials_applied_to) == 0:
+            context['trials_applied_to'] = None
+        context['trials_applied_to'] = trials_applied_to
+    else:
+        context['noshow'] = True
     achievements = user_achievements.objects.all().filter(user__email=context["email"])
     if len(achievements) > 0:
         context["achievements"] = achievements
@@ -109,3 +116,19 @@ def add_certificate(request, _id):
     else:
         raise Http404("Page not found")
 
+
+@login_required
+def view_trial_application_details(request, _id):
+    try:
+        trial = get_object_or_404(Trial, pk=_id)
+        application = Application.objects.get(user=request.user, trial=trial)
+        details_of_application = DetailsOfApplication.objects.get(application=application)
+        context = {
+            "trial": trial,
+            "application": application,
+            "details": details_of_application
+        }
+        return render(request, template_name="user_profile/trial_info.html", context=context)
+    except Exception as e:
+        print(e)
+        raise Http404("Page not found")

@@ -13,7 +13,9 @@
                 <p style="color: orangered"> {{ message }}</p>
             {% endif %}
             {% bootstrap_form form %}
-        <p>Forgot Password: <a href="{% url 'password_reset' %}">Reset</a></p>
+            <p>Forgot Password: <a href="{% url 'password_reset' %}">Reset</a></p>
+            <p>Do not have a account ?: <a href="{% url 'register' %}"> Signup</a></p>
+
             {% buttons %}
                 <button type="reset" class="btn btn-primary">Reset</button>
                 <button type="submit" class="btn btn-primary">Submit</button>

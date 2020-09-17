@@ -77,4 +77,25 @@
             No Acheivements listed by you.
         </div>
     {% endif %}
+
+    <div>
+        {% if noshow %}
+        {% else %}
+            {% if trials_applied_to %}
+                {% for trial in trials_applied_to %}
+                    <div class="card">
+                        <h1>{{ trial.trial.title }}</h1>
+                        <h3>Applied At {{ trial.date }}</h3>
+                        <a href="{% url 'trial_application_info' trial.trial.id %}">
+                            <button class=" btn-primary btn">
+                        Details
+                        </button>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                Not Applied to Any Trials.
+            {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}

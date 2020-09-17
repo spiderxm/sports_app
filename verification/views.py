@@ -6,6 +6,7 @@ from django.contrib.auth import login as auth_login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+import datetime
 import requests
 import time
 
@@ -17,7 +18,6 @@ def login(request):
         }
         return render(request, "verification/login.html", context)
     if request.method == "POST":
-        a = time.time()
         form = Login(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -25,8 +25,18 @@ def login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                print ("logged in ")
-                print(time.time() - a)
+                message = f"Login Successful on Sports Platform at {datetime.datetime.today()}.\n" \
+                          f"Please Use various facilities provided by us.\n" \
+                          f"\n\nThanks and Regards."
+                send_mail(
+                    'Login Successful',
+                    message,
+                    'sports.registraion@gmail.com',  # Admin
+                    [
+                        email
+                    ],
+                    fail_silently=False
+                )
                 if request.GET.get("next"):
                     return redirect(request.GET.get("next"))
                 return HttpResponseRedirect(reverse_lazy('home:home'))
@@ -64,7 +74,7 @@ def register(request):
                 age = form.cleaned_data['age']
                 sport = form.cleaned_data['sport']
                 state = form.cleaned_data['state']
-                message = '''Thanks for registering with us. \n Details you provided are as follows: \n first-name {} \n last-name {} \n email {} \n age {}  \n sport {} \n state {}'''.format(
+                message = '''Thanks for registering with us. \n Details you provided are as follows: \n first-name {} \n last-name {} \n email {} \n age {}  \n sport {} \n state {} \n\n\n Thanks and Regards'''.format(
                     first_name,
                     last_name,
                     email,
@@ -82,7 +92,7 @@ def register(request):
                         fail_silently=False
                     )
                 except Exception as e:
-                    print (e)
+                    print(e)
             else:
                 return render(request, "verification/register.html",
                               {"form": form, "message": "Invalid reCAPTCHA. Please try again."})

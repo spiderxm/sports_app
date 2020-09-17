@@ -1,0 +1,34 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+    <div style="font-family: monospace">
+        <h1>
+            {{ trial.title }}
+        </h1>
+        <h2>
+            {{ trial.description }}
+        </h2>
+        <h2>
+            {{ trial.venue }}
+        </h2>
+        <h2>
+            {{ trial.age_group }}
+        </h2>
+        <h2>
+            {{ trial.sport }}
+        </h2>
+        <h2>{{ trial.state }}</h2>
+        <h3>{{ trial.date }} {{ trial.time }}</h3>
+    </div>
+    <div style="font-family: monospace">
+        <h1> Details Given by You</h1>
+        <h1>height {{ details.height }} kg</h1>
+        <h1>weight {{ details.weight }} cm</h1>
+        <h2>Why you should be selected : {{ details.why_should_be_selected }}</h2>
+        <h3>Disability: {{ details.disability }} </h3>
+        {% if details.disability %}
+            <h3>Disability: {{ details.disability_details }} </h3>
+        {% endif %}
+    </div>
+
+{% endblock %}
