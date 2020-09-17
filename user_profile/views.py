@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, Http404, HttpResponseRed
 from verification.models import CustomUser, ProfilePicture
 from user_profile.forms import Achievement, Certificate
 from django.urls import reverse_lazy
-from verification.models import user_achievements, Certificates
+from verification.models import user_achievements, Certificates, Trial
 
 
 def profile(request, _id):
@@ -108,3 +108,4 @@ def add_certificate(request, _id):
                 return render(request, "user_profile/add_certificates.html", {"form": form})
     else:
         raise Http404("Page not found")
+

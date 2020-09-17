@@ -12,5 +12,16 @@
                 </a>
             {% endif %}
         {% endif %}
+        {% for trial in trials %}
+            <div class="card" style="padding: 1rem">
+                <h1>{{ trial.title }}</h1>
+                <h2>{{ trial.date }} {{ trial.time }}</h2>
+                <h2> Sport : {{ trial.sport }}</h2>
+                <h2> State : {{ trial.state }}</h2>
+                <a href="{% url 'home:trial' trial.id %}">
+                    <button class="btn btn-primary">Details</button>
+                </a>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
