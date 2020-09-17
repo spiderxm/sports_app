@@ -1,18 +1,24 @@
 {% extends "partials/base.html" %}
 
 {% block content %}
-    <div>
-        <div>
+    <div style="font-family: monospace; padding: 1rem">
+        <div style="margin: 0 auto; width: 500px; margin-top: 10vh;margin-bottom: 1rem; padding: .5rem;  box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
             <form action="" method="post" enctype="multipart/form-data" class="form">
-                <div>
-                    <h2>{{ user.first_name }} {{ user.lastname }} Upload Photo</h2>
+                <div class="modal-header">
+                    <h2>{{ user.first_name }} {{ user.last_name }} Update Image</h2>
                 </div>
-                {% csrf_token %}
-                <input type="number" value="{{ user.id }}" hidden name="_id">
-                <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg" required/>
-                <button type="button">Cancel</button>
-                <button type="reset">Reset</button>
-                <button type="submit">Submit</button>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" value="{{ user.id }}" hidden name="_id">
+                        <input type="file" class="form-control" name="image" accept="image/x-png,image/gif,image/jpeg"
+                               required/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>
