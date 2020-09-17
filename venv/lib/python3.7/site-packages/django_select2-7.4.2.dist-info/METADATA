@@ -1,0 +1,63 @@
+Metadata-Version: 2.1
+Name: django-select2
+Version: 7.4.2
+Summary: Select2 option fields for Django
+Home-page: https://github.com/codingjoe/django-select2
+Author: Johannes Hoppe
+Author-email: info@johanneshoppe.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.0
+Requires-Dist: django (>=2.2)
+Requires-Dist: django-appconf (>=0.6.0)
+Provides-Extra: test
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: pytest-django ; extra == 'test'
+Requires-Dist: selenium ; extra == 'test'
+
+==============
+Django-Select2
+==============
+
+|version| |coverage| |license|
+
+This is a `Django`_ integration of `Select2`_.
+
+The app includes Select2 driven Django Widgets.
+
+Documentation
+-------------
+
+Documentation available at https://django-select2.readthedocs.io/.
+
+.. note::
+    Django's admin comes with builtin support for Select2
+    via the `autocomplete_fields`_ feature.
+
+
+.. _Django: https://www.djangoproject.com/
+.. _Select2: https://select2.org/
+.. _autocomplete_fields: https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields
+
+.. |version| image:: https://img.shields.io/pypi/v/Django-Select2.svg
+   :target: https://pypi.python.org/pypi/Django-Select2/
+.. |coverage| image:: https://codecov.io/gh/codingjoe/django-select2/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/codingjoe/django-select2
+.. |license| image:: https://img.shields.io/badge/license-APL2-blue.svg
+   :target: https://raw.githubusercontent.com/codingjoe/django-select2/master/LICENSE.txt
+
+

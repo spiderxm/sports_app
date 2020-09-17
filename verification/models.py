@@ -124,9 +124,9 @@ class UnionTerritory(models.Model):
 
 
 class ProfilePicture(models.Model):
-    '''
+    """
     Model to store profile picture of user
-    '''
+    """
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(default="default.jpg", upload_to='profile_pics')
 
@@ -135,9 +135,9 @@ class ProfilePicture(models.Model):
 
 
 class user_achievements(models.Model):
-    '''
+    """
     Model to store achievements of users
-    '''
+    """
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     Name_of_Tournament = models.CharField(max_length=256, default="", null=False)
     date = models.DateField(null=False)
@@ -150,9 +150,9 @@ class user_achievements(models.Model):
 
 
 class Certificates(models.Model):
-    '''
+    """
     Model to store certificates of user
-    '''
+    """
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     message = models.TextField()
     certificate = models.FileField(upload_to='certificates')
@@ -164,15 +164,19 @@ class Certificates(models.Model):
 
 
 class Trial(models.Model):
+    """
+    Model to create trials for sportsperson
+    """
     date = models.DateField()
     time = models.TimeField()
     venue = models.CharField(max_length=256)
     state = models.ForeignKey('State', on_delete=models.PROTECT)
     sport = models.ForeignKey('Sport', on_delete=models.PROTECT)
-    selections = models.PositiveIntegerField(default=5)
+    no_of_selections = models.PositiveIntegerField(default=5)
     description = models.TextField()
     title = models.CharField(max_length=256)
     min_height = models.PositiveIntegerField()
     max_height = models.PositiveIntegerField()
     min_weight = models.PositiveIntegerField()
     max_weight = models.PositiveIntegerField()
+    age_group = models.CharField(max_length=256)

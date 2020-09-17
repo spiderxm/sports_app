@@ -4,4 +4,13 @@
     <div>
         Home
     </div>
+    <div>
+        {% if user %}
+            {% if user.is_staff == True %}
+                <a href="{% url 'home:add_trial' %}">
+                    <button class="btn btn-primary">Add Trial</button>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}
