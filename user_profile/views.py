@@ -30,6 +30,15 @@ def profile(request, _id):
     achievements = user_achievements.objects.all().filter(user__email=context["email"])
     if len(achievements) > 0:
         context["achievements"] = achievements
+        context["no_achievements"] = len(achievements)
+    else:
+        context["no_achievements"] = 0
+    certificates = Certificates.objects.all().filter(user__email=context["email"])
+    if len(certificates) > 0:
+        context["certificates"] = certificates
+        context["no_certificates"] = len(certificates)
+    else:
+        context["no_certificates"] = 0
     try:
         context["image_url"] = profile.profilepicture.image.url
         context["image_url"] = context["image_url"].split("?")[0]
