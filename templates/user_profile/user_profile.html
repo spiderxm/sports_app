@@ -2112,6 +2112,15 @@
                                                        placeholder="{{ no_applications }}" disabled>
                                             </div>
                                         </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">
+                                                    Date Joined</label>
+                                                <input type="email" id="input-email" style="color: black"
+                                                       class="form-control form-control-alternative"
+                                                       placeholder="{{ date_joined }}" disabled>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <h6 class="heading-small text-muted mb-4">User information</h6>
@@ -2244,6 +2253,50 @@
                                                             </a></td>
                                                         <td>
                                                             {{ certificate.createdOn }}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if applications %}
+                                    <hr class="my-4">
+                                    <h6 class="heading-small text-muted mb-4">Application to trials</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style="width:20% ">Title</th>
+                                                    <th scope="col" style="width:20% ">Date</th>
+                                                    <th scope="col" style="width:10% ">Sport</th>
+                                                    <th scope="col" style="width:10% ">State</th>
+                                                    <th scope="col" style="width:20% ">Applied At</th>
+                                                    <th scope="col" style="width:20% ">Details</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for application in applications %}
+                                                    <tr>
+                                                        <td>{{ application.trial.title }}</td>
+                                                        <td>
+                                                            {{ application.trial.date }}
+                                                        </td>
+                                                        <td>
+                                                            {{ application.trial.sport }}
+                                                        </td>
+                                                        <td>
+                                                            {{ application.trial.state }}
+                                                        </td>
+                                                         <td>
+                                                            {{ application.date }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{% url "trial_application_info" application.trial.id %}" style="text-decoration: none; color: #2bffc6">
+                                                                View Details of Application
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}

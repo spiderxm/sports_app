@@ -12,6 +12,7 @@ def profile(request, _id):
         "first_name": profile.first_name,
         "last_name": profile.last_name,
         "age": profile.age,
+        "date_joined": profile.date_joined,
         "sport": profile.sport,
         "state": profile.state,
         "email": profile.email,
@@ -45,8 +46,11 @@ def profile(request, _id):
     except:
         context["image_url"] = "https://storage.cloud.google.com/mrigankbucket/default.png"
 
-    Applications = Application.objects.all().filter(user_id=request.user.id)
-    context["applications"] = Applications
+    Applications = Application.objects.all().filter(user_id=profile.id)
+    if str(request.user.id) == str(_id):
+        context["applications"] = Applications
+    else:
+        context["applications"] = None
     context["no_applications"] = len(Applications)
     return render(request, "user_profile/user_profile.html", context=context)
 
