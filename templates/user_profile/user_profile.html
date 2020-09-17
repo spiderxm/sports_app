@@ -14,7 +14,7 @@
             </div>
             <div style="text-align: center; margin: 10px">
                 {% if user.id == id %}
-                    <a href="{% url 'upload_photo' id %}">
+                    <a href="{% url 'upload_photo' %}">
                         <button class="btn btn-primary">Update Image</button>
                     </a>
                 {% endif %}
@@ -35,14 +35,14 @@
             </div>
             <div style="text-align: center; margin: 10px">
                 {% if user.id == id %}
-                    <a href="{% url 'add_achievement' user.id %}">
+                    <a href="{% url 'add_achievement' %}">
                         <button class="btn btn-primary">Add Achievement</button>
                     </a>
                 {% endif %}
             </div>
             <div style="text-align: center; margin: 10px">
                 {% if user.id == id %}
-                    <a href="{% url 'add_certificate' user.id %}">
+                    <a href="{% url 'add_certificate' %}">
                         <button class="btn btn-primary">Add Certificate</button>
                     </a>
                 {% endif %}

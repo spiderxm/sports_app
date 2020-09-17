@@ -9,11 +9,7 @@ import requests
 
 
 def home(request):
-    trials = Trial.objects.all().filter(date__gte=datetime.date.today())
-    context = {
-        "trials": trials
-    }
-    return render(request, "home/home.html", context=context)
+    return render(request, "home/home.html")
 
 
 def olympics(request):

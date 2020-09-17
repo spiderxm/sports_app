@@ -39,83 +39,73 @@ def profile(request, _id):
 
 
 @login_required
-def upload_photo(request, _id):
-    if str(request.user.id) == str(_id):
-        if request.method == "GET":
-            return render(request, "user_profile/upload_photo.html")
+def upload_photo(request):
+    if request.method == "GET":
+        return render(request, "user_profile/upload_photo.html")
 
-        if request.method == "POST":
-            data = request.POST
-            previous_picture = ProfilePicture.objects.all().filter(user=request.user)
-            try:
-                if previous_picture[0]:
-                    previous_picture = previous_picture[0]
-                    previous_picture.image = request.FILES["image"]
-                    previous_picture.save()
-                    print(previous_picture.user)
-            except:
-                picture = ProfilePicture(user=request.user)
-                picture.image = request.FILES["image"]
-                picture.save()
-            return HttpResponseRedirect('/user_profile/{}/'.format(_id))
-    else:
-        raise Http404("Page not found")
+    if request.method == "POST":
+        data = request.POST
+        previous_picture = ProfilePicture.objects.all().filter(user=request.user)
+        try:
+            if previous_picture[0]:
+                previous_picture = previous_picture[0]
+                previous_picture.image = request.FILES["image"]
+                previous_picture.save()
+                print(previous_picture.user)
+        except:
+            picture = ProfilePicture(user=request.user)
+            picture.image = request.FILES["image"]
+            picture.save()
+        return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
 
 
 @login_required
-def add_achievement(request, _id):
-    if str(request.user.id) == str(_id):
-        if request.method == "GET":
-            form = Achievement()
+def add_achievement(request):
+    if request.method == "GET":
+        form = Achievement()
+        return render(request, "user_profile/add_achievements.html", {"form": form})
+
+    if request.method == "POST":
+        form = Achievement(request.POST)
+        if form.is_valid():
+            date = form.cleaned_data["date"]
+            tournament = form.cleaned_data["Name_of_Tournament"]
+            venue = form.cleaned_data["Venue"]
+            event = form.cleaned_data["Event"]
+            Medal_won = form.cleaned_data["Medal_won"]
+            achievement = user_achievements(user=request.user,
+                                            date=date,
+                                            Name_of_Tournament=tournament,
+                                            Venue=venue,
+                                            Event=event,
+                                            Medal_won=Medal_won)
+            achievement.save()
+            print(achievement)
+            return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
+        else:
             return render(request, "user_profile/add_achievements.html", {"form": form})
 
-        if request.method == "POST":
-            form = Achievement(request.POST)
-            if form.is_valid():
-                date = form.cleaned_data["date"]
-                tournament = form.cleaned_data["Name_of_Tournament"]
-                venue = form.cleaned_data["Venue"]
-                event = form.cleaned_data["Event"]
-                Medal_won = form.cleaned_data["Medal_won"]
-                achievement = user_achievements(user=request.user,
-                                                date=date,
-                                                Name_of_Tournament=tournament,
-                                                Venue=venue,
-                                                Event=event,
-                                                Medal_won=Medal_won)
-                achievement.save()
-                print(achievement)
-                return HttpResponseRedirect('/user_profile/{}/'.format(_id))
-            else:
-
-                return render(request, "user_profile/add_achievements.html", {"form": form})
-    else:
-        raise Http404("Page not found")
-
 
 @login_required
-def add_certificate(request, _id):
-    if str(request.user.id) == str(_id):
-        if request.method == "GET":
-            form = Certificate()
-            return render(request, "user_profile/add_certificates.html", {"form": form})
+def add_certificate(request):
+    if request.method == "GET":
+        form = Certificate()
+        return render(request, "user_profile/add_certificates.html", {"form": form})
 
-        if request.method == "POST":
-            form = Certificate(request.POST, request.FILES)
-            if form.is_valid():
-                certificate = Certificates.objects.create(
-                    user=request.user,
-                    message=request.POST['message'],
-                    certificate=request.FILES['certificate']
-                )
-                print(certificate)
-                certificate.save()
-                return HttpResponseRedirect('/user_profile/{}/'.format(_id))
-            else:
-                print(form.errors)
-                return render(request, "user_profile/add_certificates.html", {"form": form})
-    else:
-        raise Http404("Page not found")
+    if request.method == "POST":
+        form = Certificate(request.POST, request.FILES)
+        if form.is_valid():
+            certificate = Certificates.objects.create(
+                user=request.user,
+                message=request.POST['message'],
+                certificate=request.FILES['certificate']
+            )
+            print(certificate)
+            certificate.save()
+            return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
+        else:
+            print(form.errors)
+            return render(request, "user_profile/add_certificates.html", {"form": form})
 
 
 @login_required
