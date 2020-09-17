@@ -162,3 +162,17 @@ class Certificates(models.Model):
     def __str__(self):
         return '{} Certificate {}'.format(self.user.email, self.message)
 
+
+class Trial(models.Model):
+    date = models.DateField()
+    time = models.TimeField()
+    venue = models.CharField(max_length=256)
+    state = models.ForeignKey('State', on_delete=models.PROTECT)
+    sport = models.ForeignKey('Sport', on_delete=models.PROTECT)
+    selections = models.PositiveIntegerField(default=5)
+    description = models.TextField()
+    title = models.CharField(max_length=256)
+    min_height = models.PositiveIntegerField()
+    max_height = models.PositiveIntegerField()
+    min_weight = models.PositiveIntegerField()
+    max_weight = models.PositiveIntegerField()

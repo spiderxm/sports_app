@@ -22,6 +22,9 @@
         <div class="navbar-nav">
             <a href="{% url 'home:home' %}" class="nav-item nav-link active">Home</a>
             <a href="{% url 'home:sports' %}" class="nav-item nav-link">Sports</a>
+            <a href="{% url 'home:news' %}" class="nav-item nav-link">News</a>
+            <a href="{% url 'home:olympic_stats' %}" class="nav-item nav-link">Olympic Stats</a>
+
             {% if user.id %}
                 <a href="{% url 'user_profile' user.id %}" class="nav-item nav-link">User Profile</a>
                 <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
