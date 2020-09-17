@@ -45,8 +45,18 @@ def add_trial(request):
     if request.user.is_staff != True:
         raise Http404("Page not found")
     else:
-        form = AddTrial()
-        context = {
-            "form": form
-        }
-        return render(request, template_name="home/add_trial.html", context=context)
+        if request.method == "GET":
+            form = AddTrial()
+            context = {
+                "form": form
+            }
+            return render(request, template_name="home/add_trial.html", context=context)
+        else:
+            form = AddTrial(request.POST)
+            if form.is_valid():
+                form.save()
+                success_url = reverse_lazy("home:home")
+                return HttpResponseRedirect(success_url)
+            else:
+                context = {"form": form}
+                return render(request, template_name="home/add_trial.html", context=context)

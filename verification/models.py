@@ -167,6 +167,7 @@ class Trial(models.Model):
     """
     Model to create trials for sportsperson
     """
+    title = models.CharField(max_length=256)
     date = models.DateField()
     time = models.TimeField()
     venue = models.CharField(max_length=256)
@@ -174,9 +175,41 @@ class Trial(models.Model):
     sport = models.ForeignKey('Sport', on_delete=models.PROTECT)
     no_of_selections = models.PositiveIntegerField(default=5)
     description = models.TextField()
-    title = models.CharField(max_length=256)
-    min_height = models.PositiveIntegerField()
-    max_height = models.PositiveIntegerField()
-    min_weight = models.PositiveIntegerField()
-    max_weight = models.PositiveIntegerField()
+    min_height = models.PositiveIntegerField(default=155)
+    max_height = models.PositiveIntegerField(default=175)
+    min_weight = models.PositiveIntegerField(default=60)
+    max_weight = models.PositiveIntegerField(default=80)
     age_group = models.CharField(max_length=256)
+
+
+class Application(models.Model):
+    """
+    Model to maintain the application of user to various trials
+    """
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    trial = models.ForeignKey(Trial, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_created=True)
+
+
+class DetailsOfApplication(models.Model):
+    """
+    Model to add details to user application to various trials of the user
+    """
+    options = (
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('AB+', 'AB+'),
+        ('O+', 'O+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('AB-', 'AB-'),
+        ('O-', 'O-')
+
+    )
+    application = models.ForeignKey('Application', on_delete=models.CASCADE)
+    why_should_be_selected = models.TextField()
+    weight = models.PositiveIntegerField()
+    height = models.PositiveIntegerField()
+    blood_group = models.CharField(max_length=256, choices=options)
+    disability = models.BooleanField(default=False)
+    disability_details = models.TextField(blank=True)
