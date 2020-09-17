@@ -75,6 +75,10 @@
             padding: 1rem;
         }
 
+        section {
+            scroll-behavior: smooth;
+        }
+
         @media (min-width: 40rem) {
             .cards_item {
                 width: 50%;
@@ -138,7 +142,7 @@
             height: auto;
             padding-top: 8rem;
             padding-bottom: 8rem;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../img/bg-masthead.jpg");
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://storage.cloud.google.com/sport_application/back.png");
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -162,17 +166,20 @@
     </style>
 {% endblock %}
 {% block content %}
+    <header class="masthead d-flex" style="font-family: monospace; color: white">
+        <div class="container text-center my-auto">
+            <h1 class="mb-1">Sports Trial Registration Platform</h1>
+            <h3 class="mb-5">
+                <em>Explore Various Features Present Here To Ease Your Life</em>
+            </h3>
+            <a class="smooth btn-xl js-scroll-trigger" href="#trials">
+                <button type="button" class="btn btn-outline-dark" style="color: white; font-size: 1.5rem">Explore
+                </button>
+            </a>
+        </div>
+        <div class="overlay"></div>
+    </header>
     {% if user %}
-        <header class="masthead d-flex" style="font-family: monospace">
-            <div class="container text-center my-auto">
-                <h1 class="mb-1">Sports Trial Registration Platform</h1>
-                <h3 class="mb-5">
-                    <em>Explore Various Features Present Here To Ease Your Life</em>
-                </h3>
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#trials">Explore</a>
-            </div>
-            <div class="overlay"></div>
-        </header>
         {% if user.is_staff == True %}
             <section style="font-family: monospace">
                 <div class="container">
@@ -298,7 +305,7 @@
             </li>
             <li class="cards_item">
                 <div class="card">
-                    <div class="card_image"><img src="https://storage.cloud.google.com/sport_application/logo.png"
+                    <div class="card_image"><img src="https://storage.cloud.google.com/sport_application/logo.jpg"
                                                  style="height: 225px"></div>
                     <div class="card_content">
                         <h2 class="card_title">Olympic Stats</h2>
@@ -313,10 +320,10 @@
         </ul>
     </div>
     <section>
-        <footer style="height: 60px; background-color: white">
+        <footer style="height: 60px; background-color: black">
             <div style="text-align: center">
+
             </div>
         </footer>
     </section>
-
 {% endblock %}
