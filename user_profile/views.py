@@ -140,3 +140,44 @@ def view_trial_application_details(request, _id):
     except Exception as e:
         print(e)
         raise Http404("Page not found")
+
+
+@login_required
+def delete_certificate(request, _id):
+    if request.method == "POST":
+        certificate = get_object_or_404(Certificates, pk=_id)
+        if certificate.user == request.user:
+            certificate.delete()
+        return HttpResponseRedirect(reverse_lazy("home:home"))
+    if request.method == "GET":
+        certificate = get_object_or_404(Certificates, pk=_id)
+        if certificate.user != request.user:
+            return Http404("Page not found")
+        return render(request, "user_profile/delete_certificate.html")
+
+
+@login_required
+def delete_trial_application(request, _id):
+    if request.method == "POST":
+        try:
+            trial = get_object_or_404(Trial, pk=_id)
+            application = Application.objects.get(user=request.user, trial=trial)
+            details_of_application = DetailsOfApplication.objects.get(application=application)
+            try:
+                details_of_application.delete()
+                application.delete()
+                return HttpResponseRedirect(reverse_lazy("home:home"))
+            except:
+                return HttpResponseRedirect(reverse_lazy("home:home"))
+
+        except Exception as e:
+            print(e)
+            return HttpResponseRedirect(reverse_lazy("home:home"))
+    else:
+        try:
+            trial = get_object_or_404(Trial, pk=_id)
+            application = Application.objects.get(user=request.user, trial=trial)
+            details_of_application = DetailsOfApplication.objects.get(application=application)
+            return render(request, "user_profile/delete_trial_application.html")
+        except:
+            raise Http404("Page not found")

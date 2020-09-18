@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea disabled class="form-control">{{ trial.description }}</textarea>
+                        <textarea style="height: 110px" disabled class="form-control">{{ trial.description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Title</label>
@@ -34,6 +34,10 @@
                     <div class="form-group">
                         <label>time</label>
                         <input type="text" placeholder="{{ trial.time }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Selection To Be Made</label>
+                        <input type="text" placeholder="{{ trial.no_of_selections }}" disabled class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Age Group</label>
@@ -64,16 +68,16 @@
                         <input type="text" placeholder="{{ trial.max_weight }}" disabled class="form-control">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    {% if applied %}
-                        <h3>You have already applied for this trial</h3>
-                    {% else %}
-                        <a href="{% url 'home:apply_to_trial' trial.id %}">
-                            <button class="btn-primary btn">Apply</button>
-                        </a>
-                    {% endif %}
-                </div>
             </form>
+            <div class="modal-footer">
+                {% if applied %}
+                    <h3>You have already applied for this trial</h3>
+                {% else %}
+                    <a href="{% url 'home:apply_to_trial' trial.id %}">
+                        <button class="btn-primary btn">Apply</button>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

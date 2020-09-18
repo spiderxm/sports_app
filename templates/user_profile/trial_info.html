@@ -74,12 +74,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Why You?</label>
-                        {% if details.why_should_be_selected != "" %}
-                            <textarea disabled class="form-control">{{ details.why_should_be_selected }}</textarea>
-                        {% else %}
-                            <textarea disabled
-                                      class="form-control">No answer provided by {{ user.first_name }}</textarea>
-                        {% endif %}
+                        <textarea disabled class="form-control">{{ details.why_should_be_selected }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Height (in cm)</label>

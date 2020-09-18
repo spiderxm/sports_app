@@ -1351,9 +1351,9 @@
                 page-break-after: avoid;
             }
 
-        @ page {
-              size: a3;
-          }
+            @page {
+                size: a3;
+            }
 
             body {
                 min-width: 992px !important;
@@ -2236,9 +2236,14 @@
                                             <table class="table table-dark">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col" style="width:60% ">Message</th>
+                                                    <th scope="col" style="width:50% ">Message</th>
                                                     <th scope="col" style="width:20% ">Document</th>
-                                                    <th scope="col" style="width:20% ">Uploaded At</th>
+                                                    {% if user.id == id %}
+                                                        <th scope="col" style="width:20% ">Uploaded At</th>
+                                                        <th scope="col" style="width:10% ">Delete</th>
+                                                    {% else %}
+                                                        <th scope="col" style="width:30% ">Uploaded At</th>
+                                                    {% endif %}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -2254,6 +2259,14 @@
                                                         <td>
                                                             {{ certificate.createdOn }}
                                                         </td>
+                                                        {% if user.id == id %}
+                                                            <td>
+                                                                <a href="{% url "delete_certificate" certificate.id %}"
+                                                                   style="text-decoration: none; color: #2bffc6">
+                                                                    Delete
+                                                                </a>
+                                                            </td>
+                                                        {% endif %}
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -2274,7 +2287,8 @@
                                                     <th scope="col" style="width:10% ">Sport</th>
                                                     <th scope="col" style="width:10% ">State</th>
                                                     <th scope="col" style="width:20% ">Applied At</th>
-                                                    <th scope="col" style="width:20% ">Details</th>
+                                                    <th scope="col" style="width:10% ">Details</th>
+                                                    <th scope="col" style="width:10% ">Delete</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -2290,12 +2304,19 @@
                                                         <td>
                                                             {{ application.trial.state }}
                                                         </td>
-                                                         <td>
+                                                        <td>
                                                             {{ application.date }}
                                                         </td>
                                                         <td>
-                                                            <a href="{% url "trial_application_info" application.trial.id %}" style="text-decoration: none; color: #2bffc6">
+                                                            <a href="{% url "trial_application_info" application.trial.id %}"
+                                                               style="text-decoration: none; color: #2bffc6">
                                                                 Details
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{% url "delete_trial_application" application.trial.id %}"
+                                                               style="text-decoration: none; color: #2bffc6">
+                                                                Delete
                                                             </a>
                                                         </td>
                                                     </tr>

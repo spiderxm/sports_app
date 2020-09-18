@@ -33,7 +33,6 @@ def login(request):
                     "message": "Invalid Credetials Provided"
                 }
                 return render(request, "verification/login.html", context)
-
         else:
             context = {
                 "form": form
