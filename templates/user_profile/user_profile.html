@@ -2210,7 +2210,12 @@
                                                     <th scope="col" style="width:20% ">Date</th>
                                                     <th scope="col" style="width:20% ">Event</th>
                                                     <th scope="col" style="width:20% ">Venue</th>
-                                                    <th scope="col" style="width:20% ">Medal Won</th>
+                                                    {% if user.id == id %}
+                                                        <th scope="col" style="width:10% ">Medal Won</th>
+                                                        <th scope="col" style="width:10% ">Delete</th>
+                                                    {% else %}
+                                                        <th scope="col" style="width:20% ">Medal Won</th>
+                                                    {% endif %}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -2221,6 +2226,15 @@
                                                         <td>{{ achievement.Event }}</td>
                                                         <td>{{ achievement.Venue }}</td>
                                                         <td>{{ achievement.Medal_won }}</td>
+                                                        {% if user.id == id %}
+                                                            <td>
+                                                                <a href="{% url "delete_achievement" achievement.id %}"
+                                                                   style="text-decoration: none; color: #2bffc6">
+                                                                    Delete
+                                                                </a>
+                                                            </td>
+
+                                                        {% endif %}
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>

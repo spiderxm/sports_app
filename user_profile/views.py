@@ -157,6 +157,20 @@ def delete_certificate(request, _id):
 
 
 @login_required
+def delete_achievement(request, _id):
+    if request.method == "POST":
+        achievement = get_object_or_404(user_achievements, pk=_id)
+        if achievement.user == request.user:
+            achievement.delete()
+        return HttpResponseRedirect(reverse_lazy("home:home"))
+    if request.method == "GET":
+        achievement = get_object_or_404(user_achievements, pk=_id)
+        if achievement.user != request.user:
+            return Http404("Page not found")
+        return render(request, "user_profile/delete_achievement.html")
+
+
+@login_required
 def delete_trial_application(request, _id):
     if request.method == "POST":
         try:
