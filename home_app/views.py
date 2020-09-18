@@ -16,6 +16,11 @@ def olympics(request):
     return render(request, "home/olympics.html")
 
 
+def trial(request):
+    trials = Trial.objects.all()
+    return render(request, "home/trials.html", {"trials": trials})
+
+
 def sport(request):
     sports = Sport.objects.all()
     context = {

@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sports_data',
-        'HOST': 'sports.ciwe3trzqlhw.us-east-1.rds.amazonaws.com',
+        'HOST': '35.244.27.212',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': '4eBkh,qSB[bAX8gy',

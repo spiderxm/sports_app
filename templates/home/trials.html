@@ -1,0 +1,43 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+    <div class="py-5" style="font-family: monospace; font-size: 12px">
+        <div class="container">
+            <div style="text-align: center">
+                <h4 style="font-family: monospace; font-size: 2rem"><strong>Trials</strong></h4>
+            </div>
+            <br>
+            <div class="row hidden-md-up" style="text-align: center">
+
+                {% for trial in trials %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card" style="width: 18rem; height: 350px; margin: .5rem auto">
+                            <div class="card-header" style="text-align: center; font-size: 2rem">
+                                {{ trial.title }}
+                            </div>
+                            <div class="card-body" style="text-align: left;">
+                                <p class="card-text">
+                                <ul style="font-size: 1rem">
+                                    <li>Date : {{ trial.date }}</li>
+                                    <li>Time : {{ trial.time }}</li>
+                                    <li>Sport : {{ trial.sport }}</li>
+                                    <li>State : {{ trial.state }}</li>
+                                </ul>
+                                </p>
+                                <div style="text-align: right">
+                                    <a href="{% url "home:trial" trial.id %}">
+                                        <button type="button" class="btn btn-outline-dark">Apply</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div style="text-align: center">
+                        <h4>No Trials Present Try again Later.</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

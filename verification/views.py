@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import datetime
 import requests
-import time
 
 
 def login(request):
@@ -25,18 +24,6 @@ def login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                message = f"Login Successful on Sports Platform at {datetime.datetime.today()}.\n" \
-                          f"Please Use various facilities provided by us.\n" \
-                          f"\n\nThanks and Regards."
-                send_mail(
-                    'Login Successful',
-                    message,
-                    'sports.registraion@gmail.com',  # Admin
-                    [
-                        email
-                    ],
-                    fail_silently=False
-                )
                 if request.GET.get("next"):
                     return redirect(request.GET.get("next"))
                 return HttpResponseRedirect(reverse_lazy('home:home'))
@@ -100,7 +87,7 @@ def register(request):
         else:
             return render(request, "verification/register.html", {"form": form})
 
-        return HttpResponse("signup complete")
+        return HttpResponseRedirect(reverse_lazy("login"))
     else:
         form = Register
         return render(request, "verification/register.html", {"form": form})

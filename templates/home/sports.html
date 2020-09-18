@@ -1,11 +1,27 @@
 {% extends "partials/base.html" %}
 
+
 {% block content %}
-    <div style="margin: 2rem ">
-        <h1>LIST OF RECOGNISED NATIONAL SPORTS FEDERATIONS FOR THE YEAR 2020 BY GOVERNMENT OF INDIA</h1>
-        {% for sport in sports %}
-            <span class="badge badge-info"
-                  style="margin: 5px; padding: 10px; font-size: 20px; border-radius: 20px">{{ sport.sport }}</span>
-        {% endfor %}
+    <div class="py-5" style="font-family: monospace; font-size: 12px">
+        <div class="container">
+            <div style="text-align: center">
+                <h4 style="font-family: monospace; font-size: 2rem"><strong>LIST OF RECOGNISED NATIONAL SPORTS FEDERATIONS FOR THE YEAR 2020 BY GOVERNMENT OF INDIA</strong></h4>
+            </div>
+            <br>
+            <div class="row hidden-md-up" style="text-align: center">
+
+                {% for sport in sports %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card" style="width: 18rem;margin: .5rem auto">
+                            <div class="card-header" style="text-align: center; font-size: 1rem">
+                                {{ sport.sport }}
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <h4>No Trials Present Try again Later.</h4>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

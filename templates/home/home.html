@@ -184,7 +184,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="p-5">
-                                <img class="img-fluid rounded-circle" src="https://storage.cloud.google.com/sport_application/15990.jpg" alt="">
+                                <img class="img-fluid rounded-circle"
+                                     src="https://storage.cloud.google.com/sport_application/15990.jpg" alt="">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -219,8 +220,8 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
                             sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
                             voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        <a href="" style="color: black">
-                            <button type="button" class="btn btn-outline-secondary">Apply</button>
+                        <a href="{% url "home:trials" %}" style="color: black">
+                            <button type="button" class="btn btn-outline-secondary">Trials</button>
                         </a>
                     </div>
                 </div>
@@ -316,17 +317,5 @@
                 </div>
             </li>
         </ul>
-    </div>
-    <section>
-        <footer style="height: 72px; background-color: black;">
-            <div style="text-align: center; padding: 12px">
-                <a href="https://github.com/spiderxm/sports_app">
-                    <img src="https://img.icons8.com/windows/48/000000/github.png"
-                         style="background-color: white"/></a>
-            </div>
-        </footer>
-    </section>
-    <div hidden>
-        <a href="https://icons8.com/icon/2PelG5XP5nN5/github-squared">Github Squared icon by Icons8</a>
     </div>
 {% endblock %}

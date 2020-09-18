@@ -20,11 +20,11 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav">
-            <a href="{% url 'home:home' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'home:home' %}" class="nav-item nav-link">Home</a>
+            <a href="{% url 'home:trials' %}" class="nav-item nav-link">Trials</a>
             <a href="{% url 'home:sports' %}" class="nav-item nav-link">Sports</a>
             <a href="{% url 'home:news' %}" class="nav-item nav-link">News</a>
             <a href="{% url 'home:olympic_stats' %}" class="nav-item nav-link">Olympic Stats</a>
-
             {% if user.id %}
                 <a href="{% url 'user_profile' user.id %}" class="nav-item nav-link">User Profile</a>
                 <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
@@ -43,9 +43,22 @@
 </nav>
 {% block content %}
 {% endblock %}
-
+{#Footer#}
+<section>
+    <footer style="height: 72px; background-color: black;">
+        <div style="text-align: center; padding: 12px">
+            <a href="https://github.com/spiderxm/sports_app">
+                <img src="https://img.icons8.com/windows/48/000000/github.png"
+                     style="background-color: white"/></a>
+        </div>
+    </footer>
+</section>
+<div hidden>
+    <a href="https://icons8.com/icon/2PelG5XP5nN5/github-squared">Github Squared icon by Icons8</a>
+</div>
 {% block javascript %}
 {% endblock %}
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
