@@ -1,34 +1,138 @@
 {% extends "partials/base.html" %}
 
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+
 {% block content %}
-    <div style="font-family: monospace">
-        <h1>
-            {{ trial.title }}
-        </h1>
-        <h2>
-            {{ trial.description }}
-        </h2>
-        <h2>
-            {{ trial.venue }}
-        </h2>
-        <h2>
-            {{ trial.age_group }}
-        </h2>
-        <h2>
-            {{ trial.sport }}
-        </h2>
-        <h2>{{ trial.state }}</h2>
-        <h3>{{ trial.date }} {{ trial.time }}</h3>
-    </div>
-    <div style="font-family: monospace">
-        <h1> Details Given by You</h1>
-        <h1>height {{ details.height }} kg</h1>
-        <h1>weight {{ details.weight }} cm</h1>
-        <h2>Why you should be selected : {{ details.why_should_be_selected }}</h2>
-        <h3>Disability: {{ details.disability }} </h3>
-        {% if details.disability %}
-            <h3>Disability: {{ details.disability_details }} </h3>
-        {% endif %}
+    <div style="height: 90vh; font-family: monospace ;padding: 1rem;">
+        <div style="margin: 0 auto; width: 450px; margin-top: 10vh; box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
+            <form class="form-group">
+                <div class="modal-header">
+                    <h1>Trial Info</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" placeholder="{{ trial.title }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea disabled class="form-control">{{ trial.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" placeholder="{{ trial.title }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Venue</label>
+                        <input type="text" placeholder="{{ trial.venue }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" placeholder="{{ trial.date }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>time</label>
+                        <input type="text" placeholder="{{ trial.time }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Age Group</label>
+                        <input type="text" placeholder="{{ trial.age_group }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Sport </label>
+                        <input type="text" placeholder="{{ trial.sport }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" placeholder="{{ trial.state }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Height (in cm)</label>
+                        <input type="text" placeholder="{{ trial.min_height }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Height (in cm)</label>
+                        <input type="text" placeholder="{{ trial.max_height }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Weight (in kg)</label>
+                        <input type="text" placeholder="{{ trial.min_weight }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Weight (in kg)</label>
+                        <input type="text" placeholder="{{ trial.max_weight }}" disabled class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="margin: 0 auto; width: 450px; margin-top: 15vh; margin-bottom: 100px; box-shadow: 5px 5px 10px 5px #888888;border-radius: 1rem">
+            <form class="form-group">
+                <div class="modal-header">
+                    <h1>Details Given by You</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Why You?</label>
+                        {% if details.why_should_be_selected != "" %}
+                            <textarea disabled class="form-control">{{ details.why_should_be_selected }}</textarea>
+                        {% else %}
+                            <textarea disabled
+                                      class="form-control">No answer provided by {{ user.first_name }}</textarea>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Height (in cm)</label>
+                        <input type="text" placeholder="{{ details.height }}" disabled class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Weight (in kg)</label>
+                        <input type="text" placeholder="{{ details.weight }}" disabled class="form-control">
+                    </div>
+                    {% if details.disability %}
+                        <div>
+                            <label>
+                                Disability
+                            </label>
+                            <input type="text" placeholder="Yes" disabled class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Disability Details</label>
+                            {% if details.disability_details != "" %}
+                                <textarea disabled class="form-control">{{ details.why_should_be_selected }}</textarea>
+                            {% else %}
+                                <textarea disabled
+                                          class="form-control">No details provided by {{ user.first_name }}</textarea>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div>
+                            <label>
+                                Disability
+                            </label>
+                            <input type="text" placeholder="No" disabled class="form-control">
+                        </div>
+                    {% endif %}
+
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}
+
+
+{#        <h3>{{ trial.date }} {{ trial.time }}</h3>#}
+{#    </div>#}
+{#    <div style="font-family: monospace">#}
+{#        <h1> Details Given by You</h1>#}
+{#        <h1>height {{ details.height }} kg</h1>#}
+{#        <h1>weight {{ details.weight }} cm</h1>#}
+{#        <h2>Why you should be selected : {{ details.why_should_be_selected }}</h2>#}
+{#        <h3>Disability: {{ details.disability }} </h3>#}
+{#        {% if details.disability %}#}
+{#            <h3>Disability: {{ details.disability_details }} </h3>#}
+{#        {% endif %}#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}

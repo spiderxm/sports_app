@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^olympics_stats/$', olympics, name="olympic_stats"),
     url(r'^sports_news/$', news, name="news"),
     url(r'^add_trial/$', add_trial, name="add_trial"),
-    url(r'^trail/(?P<_id>\d+)/$',trial_detail, name="trial"),
+    url(r'^trial/(?P<_id>\d+)/$', trial_detail, name="trial"),
     url(r'^apply_trial/(?P<_id>\d+)/$', apply_to_trial, name="apply_to_trial")
 
 ]
