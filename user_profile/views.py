@@ -44,7 +44,7 @@ def profile(request, _id):
         context["image_url"] = profile.profilepicture.image.url
         context["image_url"] = context["image_url"].split("?")[0]
     except:
-        context["image_url"] = "https://storage.cloud.google.com/mrigankbucket/default.png"
+        context["image_url"] = "https://storage.googleapis.com/mrigankbucket/default.png"
 
     Applications = Application.objects.all().filter(user_id=profile.id)
     if str(request.user.id) == str(_id):
