@@ -89,19 +89,21 @@
             <div class="container">
                 <div class="card-group vgr-cards">
                     {% for news in News %}
-                        <div>
-                            <div class="card">
-                                <div class="card-img-body">
-                                    <img class="card-img" src="{{ news.urlToImage }}" style="width: 400px"
-                                         alt="Card image cap">
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ news.title }}</h4>
-                                    <h5>Author : {{ news.author }}</h5>
-                                    <a href="{{ news.url }}" class="btn btn-outline-primary">Detailed News</a>
+                        {% if news.urlToImage != None %}
+                            <div>
+                                <div class="card">
+                                    <div class="card-img-body">
+                                        <img class="card-img" src="{{ news.urlToImage }}" style="width: 400px"
+                                             alt="NO IMAGE">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ news.title }}</h4>
+                                        <h5>Author : {{ news.author }}</h5>
+                                        <a href="{{ news.url }}" class="btn btn-outline-primary">Detailed News</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% empty %}
                         <h3>No News Present Please Try Again Later</h3>
                     {% endfor %}
