@@ -81,7 +81,9 @@
 {% endblock %}
 {% block content %}
     <div style="margin: 2rem; font-family: monospace ">
-        <h1>News</h1>
+        <div style="text-align: center; margin-bottom: 1rem">
+            <h1>Sports News</h1>
+        </div>
         {% if error %}
             <h3>There is some error please try again later</h3>
         {% else %}
@@ -92,14 +94,15 @@
                         {% if news.urlToImage != None %}
                             <div>
                                 <div class="card">
-                                    <div class="card-img-body">
+                                    <div class="card-img-body" style="width: 400px">
                                         <img class="card-img" src="{{ news.urlToImage }}" style="width: 400px"
                                              alt="NO IMAGE">
                                     </div>
                                     <div class="card-body">
                                         <h4 class="card-title">{{ news.title }}</h4>
                                         <h5>Author : {{ news.author }}</h5>
-                                        <a href="{{ news.url }}" class="btn btn-outline-primary">Detailed News</a>
+                                        <a target="_blank" href="{{ news.url }}" class="btn btn-outline-primary">Detailed
+                                            News</a>
                                     </div>
                                 </div>
                             </div>
@@ -113,20 +116,3 @@
         {% endif %}
 {% endblock %}
 
-{#<div class="container">#}
-{#    <div class="card-group vgr-cards">#}
-{##}
-{#        <div class="card">#}
-{#            <div class="card-img-body">#}
-{#                <img class="card-img" src="https://picsum.photos/400/200" alt="Card image cap"></div>#}
-{#            <div class="card-body">#}
-{#                <h4 class="card-title">Card title</h4>#}
-{#                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.#}
-{#                    This is a wider card with supporting text below as a natural lead-in to additional content. This#}
-{#                    content is a little bit longer. This card has supporting text below as a natural lead-in to#}
-{#                    additional content.</p>#}
-{#                <a href="#" class="btn btn-outline-primary">Primary</a>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}

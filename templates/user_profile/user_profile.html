@@ -2075,6 +2075,19 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <div class="container" style="text-align: center; margin-top: 10px">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h5>{{ message }}</h5>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="card-body">
                             <form>
                                 <div class="pl-lg-4">
@@ -2118,7 +2131,7 @@
                                                     Date Joined</label>
                                                 <input type="email" id="input-email" style="color: black"
                                                        class="form-control form-control-alternative"
-                                                       placeholder="{{ date_joined }}" disabled>
+                                                       placeholder="{{ date_joined.date }}" disabled>
                                             </div>
                                         </div>
                                     </div>

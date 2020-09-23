@@ -4,6 +4,7 @@ from verification.models import CustomUser, ProfilePicture
 from user_profile.forms import Achievement, Certificate
 from django.urls import reverse_lazy
 from verification.models import user_achievements, Certificates, Application, DetailsOfApplication, Trial
+from django.contrib import messages
 
 
 def profile(request, _id):
@@ -73,8 +74,8 @@ def upload_photo(request):
             picture = ProfilePicture(user=request.user)
             picture.image = request.FILES["image"]
             picture.save()
+        messages.success(request, f"{request.user.first_name} you have successfully updated your image")
         return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
-
 
 @login_required
 def add_achievement(request):
@@ -97,7 +98,7 @@ def add_achievement(request):
                                             Event=event,
                                             Medal_won=Medal_won)
             achievement.save()
-            print(achievement)
+            messages.success(request, f"{request.user.first_name} you have successfully added achievement")
             return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
         else:
             return render(request, "user_profile/add_achievements.html", {"form": form})
@@ -117,8 +118,8 @@ def add_certificate(request):
                 message=request.POST['message'],
                 certificate=request.FILES['certificate']
             )
-            print(certificate)
             certificate.save()
+            messages.success(request, f"{request.user.first_name} you have successfully uploaded new certificate")
             return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
         else:
             print(form.errors)
@@ -148,7 +149,8 @@ def delete_certificate(request, _id):
         certificate = get_object_or_404(Certificates, pk=_id)
         if certificate.user == request.user:
             certificate.delete()
-        return HttpResponseRedirect(reverse_lazy("home:home"))
+        messages.success(request, f"{request.user.first_name} you have successfully deleted certificate")
+        return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
     if request.method == "GET":
         certificate = get_object_or_404(Certificates, pk=_id)
         if certificate.user != request.user:
@@ -162,7 +164,8 @@ def delete_achievement(request, _id):
         achievement = get_object_or_404(user_achievements, pk=_id)
         if achievement.user == request.user:
             achievement.delete()
-        return HttpResponseRedirect(reverse_lazy("home:home"))
+        messages.success(request, f"{request.user.first_name} you have successfully deleted achievement")
+        return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
     if request.method == "GET":
         achievement = get_object_or_404(user_achievements, pk=_id)
         if achievement.user != request.user:
@@ -180,13 +183,14 @@ def delete_trial_application(request, _id):
             try:
                 details_of_application.delete()
                 application.delete()
+                messages.success(request, f"{request.user.first_name} you have successfully deleted your application")
                 return HttpResponseRedirect(reverse_lazy("home:home"))
             except:
+                messages.error(request, f"{request.user.first_name} you have successfully deleted your application")
                 return HttpResponseRedirect(reverse_lazy("home:home"))
 
         except Exception as e:
-            print(e)
-            return HttpResponseRedirect(reverse_lazy("home:home"))
+            return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
     else:
         try:
             trial = get_object_or_404(Trial, pk=_id)
