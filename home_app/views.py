@@ -6,6 +6,7 @@ from .forms import AddTrial, ApplicationDetails
 from verification.models import Sport, Trial, Application, DetailsOfApplication
 import datetime
 import requests
+from django.contrib import messages
 
 
 def home(request):
@@ -141,7 +142,8 @@ def apply_to_trial(request, _id):
                 ],
                 fail_silently=False
             )
-            success_url = reverse_lazy("home:home")
+            messages.success(request, f"{request.user.first_name} you have successfully Applied to Trial")
+            success_url = reverse_lazy("home:trials")
             return HttpResponseRedirect(success_url)
         else:
             trial = get_object_or_404(Trial, pk=_id)

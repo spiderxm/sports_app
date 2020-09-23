@@ -138,12 +138,17 @@ class user_achievements(models.Model):
     """
     Model to store achievements of users
     """
+    options = (
+        ("gold", "gold"),
+        ("silver", "silver"),
+        ("bronze", "bronze")
+    )
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     Name_of_Tournament = models.CharField(max_length=256, default="", null=False)
     date = models.DateField(null=False)
     Venue = models.CharField(max_length=256, null=False)
     Event = models.CharField(max_length=256, null=False)
-    Medal_won = models.CharField(max_length=256, null=False)
+    Medal_won = models.CharField(max_length=256, null=False, choices=options)
 
     def __str__(self):
         return self.user.email + ''' ''' + self.Event

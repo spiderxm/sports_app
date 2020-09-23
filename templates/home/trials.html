@@ -2,6 +2,18 @@
 
 {% block content %}
     <div class="py-5" style="font-family: monospace; font-size: 12px">
+        <div class="container" style="text-align: center">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h1>{{ message }}</h1>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="container">
             <div style="text-align: center">
                 <h4 style="font-family: monospace; font-size: 2rem"><strong>Trials</strong></h4>
