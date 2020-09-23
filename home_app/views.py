@@ -62,7 +62,8 @@ def add_trial(request):
             form = AddTrial(request.POST)
             if form.is_valid():
                 form.save()
-                success_url = reverse_lazy("home:home")
+                success_url = reverse_lazy("home:trials")
+                messages.success(request, "Trial added Successfully")
                 return HttpResponseRedirect(success_url)
             else:
                 context = {"form": form}

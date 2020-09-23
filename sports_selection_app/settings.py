@@ -13,7 +13,6 @@ import uuid
 import os
 from django.contrib.messages import constants as messages
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     "bootstrap4",
     'django.contrib.admin',
     'django.contrib.auth',
+    'bootstrap_datepicker_plus',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

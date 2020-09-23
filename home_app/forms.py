@@ -1,3 +1,4 @@
+from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
 from django import forms
 
 from verification.models import Trial
@@ -18,8 +19,8 @@ class AddTrial(forms.ModelForm):
         model = Trial
         exclude = []
         widgets = {
-            'date': DateInput(attrs={'type': 'date'}),
-            'time': TimeInput(attrs={'type': 'time'}),
+            'date': DatePickerInput(),
+            'time': TimePickerInput()
         }
 
 
