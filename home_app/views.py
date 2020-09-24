@@ -108,9 +108,20 @@ def apply_to_trial(request, _id):
         form = ApplicationDetails(data)
         if form.is_valid():
             trial = get_object_or_404(Trial, pk=_id)
+            if int(data['weight']) <= trial.max_weight and int(data['weight']) >= trial.min_weight:
+                pass
+            else:
+                messages.error(request, "You fail the weight criteria. Better luck next time")
+                success_url = reverse_lazy("home:trials")
+                return HttpResponseRedirect(success_url)
+            if int(data['height']) <= trial.max_height and int(data['height']) >= trial.min_height:
+                pass
+            else:
+                messages.error(request, "You fail the height criteria. Better luck next time")
+                success_url = reverse_lazy("home:trials")
+                return HttpResponseRedirect(success_url)
             application = Application.objects.create(trial=trial, user=request.user, date=datetime.datetime.today())
             application.save()
-
             try:
                 disability = data['disability']
                 disability = True
