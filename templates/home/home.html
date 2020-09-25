@@ -200,7 +200,6 @@
                     </div>
                 </div>
             </section>
-
         {% endif %}
     {% endif %}
     <section style="font-family: monospace" id="trials">
@@ -249,6 +248,7 @@
             </div>
         </div>
     </section>
+
     <section style="font-family: monospace">
         <div class="container">
             <div class="row align-items-center">
@@ -266,6 +266,29 @@
                             voluptatum molestiae adipisci, beatae obcaecati.</p>
                         <a href="{% url "add_achievement" %}">
                             <button type="button" class="btn btn-outline-secondary">Add Achievement</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="font-family: monospace">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <img class="img-fluid rounded-circle"
+                             src="https://storage.googleapis.com/sport_application/7495.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h2 class="display-4" style="font-size: 3rem">See Other Users </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
+                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <a href="{% url "home:users" %}">
+                            <button type="button" class="btn btn-outline-secondary">Other Users</button>
                         </a>
                     </div>
                 </div>

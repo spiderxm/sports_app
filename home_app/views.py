@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect, Http404, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import AddTrial, ApplicationDetails
-from verification.models import Sport, Trial, Application, DetailsOfApplication
+from verification.models import Sport, Trial, Application, DetailsOfApplication, CustomUser
 import datetime
 import requests
 from django.contrib import messages
@@ -169,3 +169,8 @@ def apply_to_trial(request, _id):
                 "application": application
             }
             return render(request, "home/application.html", context=context)
+
+
+def users_list(request):
+    users = CustomUser.objects.all()
+    return render(request, "home/users.html", {"users": users})
