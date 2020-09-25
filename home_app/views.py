@@ -194,6 +194,8 @@ def users_list(request):
         users = users.filter(state__state=state)
     if sport:
         users = users.filter(sport__sport=sport)
+    if request.user:
+        users = users.exclude(email=request.user.email)
     context = {"users": users,
                "sports": sports,
                "states": states}
