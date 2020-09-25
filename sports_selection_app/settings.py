@@ -172,3 +172,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "sports_selection_app/static"),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
