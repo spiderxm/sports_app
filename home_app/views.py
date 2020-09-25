@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect, Http404, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import AddTrial, ApplicationDetails
-from verification.models import Sport, Trial, Application, DetailsOfApplication, CustomUser
+from verification.models import Sport, Trial, Application, DetailsOfApplication, CustomUser, State
 import datetime
 import requests
 from django.contrib import messages
@@ -19,7 +19,20 @@ def olympics(request):
 
 def trial(request):
     trials = Trial.objects.all()
-    return render(request, "home/trials.html", {"trials": trials})
+    sports = Sport.objects.all()
+    states = State.objects.all()
+    state = request.GET.get("state", None)
+    sport = request.GET.get("sport", None)
+    if sport:
+        trials = trials.filter(sport__sport=sport)
+    if state:
+        trials = trials.filter(state__state=state)
+    context = {
+        "trials": trials,
+        "sports": sports,
+        "states": states
+    }
+    return render(request, "home/trials.html", context)
 
 
 def sport(request):
@@ -172,5 +185,16 @@ def apply_to_trial(request, _id):
 
 
 def users_list(request):
+    state = request.GET.get("state", None)
+    sport = request.GET.get("sport", None)
     users = CustomUser.objects.all()
-    return render(request, "home/users.html", {"users": users})
+    sports = Sport.objects.all()
+    states = State.objects.all()
+    if state:
+        users = users.filter(state__state=state)
+    if sport:
+        users = users.filter(sport__sport=sport)
+    context = {"users": users,
+               "sports": sports,
+               "states": states}
+    return render(request, "home/users.html", context)

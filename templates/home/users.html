@@ -3,13 +3,7 @@
 {% block css %}
     <style>
         body {
-        {#    font-family: tahoma;#}
-        {#    height: 100vh;#}
-            background-image: url(https://picsum.photos/g/3000/2000);
-        {#    background-size: cover;#}
-        {#    background-position: center;#}
-        {#    display: flex;#}
-        {#    align-items: center;#}
+        {#background-image: url(https://picsum.photos/g/3000/2000);#}
         }
 
         .our-team {
@@ -118,57 +112,83 @@
 {% endblock %}
 {% block content %}
     <div class="py-5" style="font-family: monospace; font-size: 12px; margin-bottom: 100px">
-        <div class="container" style="text-align: center">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5>{{ message }}</h5>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        <div style="text-align: center">
+            <h4 style="font-family: monospace; font-size: 2rem"><strong>Users</strong></h4>
         </div>
-        <div class="container">
-            <div style="text-align: center">
-                <h4 style="font-family: monospace; font-size: 2rem"><strong>Users</strong></h4>
+        <div style="text-align: center">
+            <h5 style="font-family: monospace; font-size: 1.2rem"><strong>Filter Users</strong></h5>
+        </div>
+        <form method="get" action="">
+            <div class="row" style="margin: 1rem; font-size: 1rem">
+                <div class="col-md-1">
+
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <label for="state">State</label>
+                    <select id="state" class="form-control" name="state">
+                        <option disabled value selected>---select a state---</option>
+                        {% for state in states %}
+                            <option value="{{ state }}">{{ state }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <label for="sport">Sport</label>
+                    <select id="sport" class="form-control" name="sport">
+                        <option disabled value selected>---select a sport---</option>
+                        {% for sport in sports %}
+                            <option value="{{ sport }}">{{ sport }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="margin-top: 25px " class="col-md-2 col-sm-3">
+                    <button type="submit" class="btn btn-outline-dark form-control">Search</button>
+                </div>
+                <div class="col-md-1">
+
+                </div>
             </div>
+        </form>
+        <div class="container">
             <div class="row">
                 {% for user in users %}
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="our-team">
-                            {% if user.profilepicture.image.url %}
-                                <div class="picture">
-                                    <img class="img-fluid" src="{{ user.profilepicture.image.url }}"
-                                         style="width: 130px; height: 130px">
+                    <a href="{% url "user_profile" user.id %}" style="text-decoration: none">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="our-team">
+                                {% if user.profilepicture.image.url %}
+                                    <div class="picture">
+                                        <img class="img-fluid" src="{{ user.profilepicture.image.url }}"
+                                             style="width: 130px; height: 130px">
+                                    </div>
+                                {% else %}
+                                    <div class="picture">
+                                        <img class="img-fluid"
+                                             src="https://storage.googleapis.com/mrigankbucket/default.png"
+                                             style="width: 130px; height: 130px">
+                                    </div>
+                                {% endif %}
+                                <div class="team-content">
+                                    <h5 class="name"
+                                        style="color: black">{{ user.first_name }} {{ user.last_name }}</h5>
+                                    <h4 class="title">{{ user.sport }}</h4>
                                 </div>
-                            {% else %}
-                                 <div class="picture">
-                                    <img class="img-fluid" src="https://storage.googleapis.com/mrigankbucket/default.png"
-                                         style="width: 130px; height: 130px">
-                                </div>
-                            {% endif %}
-                            <div class="team-content">
-                                <h5 class="name">{{ user.first_name }} {{ user.last_name }}</h5>
-                                <h4 class="title">{{ user.sport }}</h4>
+                                <ul class="social">
+                                    <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook"
+                                           aria-hidden="true"></a></li>
+                                    <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter"
+                                           aria-hidden="true"></a></li>
+                                    <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus"
+                                           aria-hidden="true"></a></li>
+                                    <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-linkedin"
+                                           aria-hidden="true"></a></li>
+                                </ul>
                             </div>
-                            <ul class="social">
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook"
-                                       aria-hidden="true"></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter"
-                                       aria-hidden="true"></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus"
-                                       aria-hidden="true"></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-linkedin"
-                                       aria-hidden="true"></a></li>
-                            </ul>
                         </div>
-                    </div>
+                    </a>
                 {% empty %}
                     </div>
                     <div style="text-align: center">
-                        <h4>No Trials Present Try again Later.</h4>
+                        <h4>No User Profile With Specified Conditions</h4>
                     </div>
                 {% endfor %}
         </div>

@@ -14,13 +14,47 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <div class="container">
-            <div style="text-align: center">
-                <h4 style="font-family: monospace; font-size: 2rem"><strong>Trials</strong></h4>
+        <div style="text-align: center">
+            <h4 style="font-family: monospace; font-size: 2rem"><strong>Sports Trials</strong></h4>
+        </div>
+        <div style="text-align: center">
+            <h5 style="font-family: monospace; font-size: 1.2rem"><strong>Filter Trials</strong></h5>
+        </div>
+        <form method="get" action="">
+            <div class="row" style="margin: 1rem; font-size: 1rem">
+                <div class="col-md-1">
+
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <label for="state">State</label>
+                    <select id="state" class="form-control" name="state">
+                        <option disabled value selected>---select a state---</option>
+                        {% for state in states %}
+                            <option value="{{ state }}">{{ state }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                    <label for="sport">Sport</label>
+                    <select id="sport" class="form-control" name="sport">
+                        <option disabled value selected>---select a sport---</option>
+                        {% for sport in sports %}
+                            <option value="{{ sport }}">{{ sport }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="margin-top: 25px " class="col-md-2 col-sm-3">
+                    <button type="submit" class="btn btn-outline-dark form-control">Search</button>
+                </div>
+                <div class="col-md-1">
+
+                </div>
             </div>
+        </form>
+        <div class="container">
+
             <br>
             <div class="row hidden-md-up" style="text-align: center">
-
                 {% for trial in trials %}
                     <div class="col-md-6 col-lg-4">
                         <div class="card" style="width: 18rem; height: 350px; margin: .5rem auto">
@@ -46,7 +80,7 @@
                     </div>
                 {% empty %}
                     <div style="text-align: center">
-                        <h4>No Trials Present Try again Later.</h4>
+                        <h4 style="text-align: center">No Trials Present Try again Later.</h4>
                     </div>
                 {% endfor %}
             </div>
