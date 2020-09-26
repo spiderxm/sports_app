@@ -19,8 +19,8 @@ class AddTrial(forms.ModelForm):
         model = Trial
         exclude = []
         widgets = {
-            'date': DatePickerInput(),
-            'time': TimePickerInput()
+            'date': DateInput(attrs={'type': 'date'}),
+            'time': TimeInput(attrs={'type': 'time'})
         }
 
 
@@ -28,4 +28,3 @@ class ApplicationDetails(forms.ModelForm):
     class Meta:
         model = DetailsOfApplication
         exclude = ['application']
-

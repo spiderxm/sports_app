@@ -1,6 +1,4 @@
 import datetime
-
-from bootstrap_datepicker_plus import DatePickerInput
 from django import forms
 from verification.models import user_achievements
 from verification.models import Certificates
@@ -21,7 +19,7 @@ class Achievement(forms.ModelForm):
         model = user_achievements
         exclude = ['user']
         widgets = {
-            'date': DatePickerInput(),
+            'date': DateInput(attrs={'type': 'date'})
         }
 
 class Certificate(forms.ModelForm):
