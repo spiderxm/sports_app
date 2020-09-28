@@ -141,7 +141,7 @@ def apply_to_trial(request, _id):
             except:
                 disability = False
             application_detail = DetailsOfApplication(application=application,
-                                                      why_should_be_selected=data['why_should_be_selected'],
+                                                      why_you_should_be_selected=data['why_you_should_be_selected'],
                                                       blood_group=data['blood_group'],
                                                       weight=data['weight'],
                                                       height=data['height'],
