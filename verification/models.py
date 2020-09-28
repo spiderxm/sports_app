@@ -211,7 +211,7 @@ class DetailsOfApplication(models.Model):
         ('O-', 'O-')
     )
     application = models.ForeignKey('Application', on_delete=models.CASCADE)
-    why_should_be_selected = models.TextField()
+    why_you_should_be_selected = models.TextField()
     weight = models.PositiveIntegerField()
     height = models.PositiveIntegerField()
     blood_group = models.CharField(max_length=256, choices=options, blank=False, default="A+")
