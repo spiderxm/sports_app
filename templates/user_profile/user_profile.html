@@ -2058,6 +2058,9 @@
                                 </div>
                                 {% if user.id == id %}
                                     <div>
+                                        <a href="{% url 'updatedetails' %}" style="margin: 20px;">
+                                            <button class="btn btn-primary">Update Details</button>
+                                        </a>
                                         <a href="{% url 'upload_photo' %}" style="margin: 20px">
                                             <button class="btn btn-primary">Update Image</button>
                                         </a>
@@ -2067,9 +2070,7 @@
                                         <a href="{% url 'add_achievement' %}" style="margin: 20px">
                                             <button class="btn btn-primary">Add Achievement</button>
                                         </a>
-                                        <a href="{% url 'logout' %}" style="margin: 20px;">
-                                            <button class="btn btn-primary">Logout</button>
-                                        </a>
+
                                     </div>
 
                                 {% endif %}
@@ -2178,7 +2179,8 @@
                                             <div class="form-group focused">
                                                 <label class="form-control-label" for="input-address">Favourite
                                                     Sport</label>
-                                                <input id="input-address" class="form-control form-control-alternative" style="color: black"
+                                                <input id="input-address" class="form-control form-control-alternative"
+                                                       style="color: black"
                                                        value="{{ sport }}"
                                                        type="text" disabled>
                                             </div>
@@ -2186,7 +2188,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group focused">
                                                 <label class="form-control-label" for="input-address">State</label>
-                                                <input id="input-address" class="form-control form-control-alternative" style="color: black"
+                                                <input id="input-address" class="form-control form-control-alternative"
+                                                       style="color: black"
                                                        value="{{ state }}"
                                                        type="text" disabled>
                                             </div>

@@ -1,8 +1,14 @@
 from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
+
 from .models import CustomUser
 
+
+class UpdateDetail(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'gender', 'age', 'state', 'sport']
 
 class Register(UserCreationForm):
     email = forms.EmailField()
