@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from verification.models import user_achievements, Certificates, Application, DetailsOfApplication, Trial
 from django.contrib import messages
 import pdfcrowd
+from home_app.forms import ApplicationDetails
 
 
 def profile(request, _id):
@@ -233,3 +234,46 @@ def download_application(request, _id):
         except pdfcrowd.Error:
             messages.error(request, "There is a issue with api please try again later.")
             return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
+
+
+@login_required
+def update_application(request, _id):
+    if request.method == "GET":
+        trial = get_object_or_404(Trial, pk=_id)
+        application = Application.objects.get(user=request.user, trial=trial)
+        details_of_application = DetailsOfApplication.objects.get(application=application)
+        form = ApplicationDetails(instance=details_of_application)
+        return render(request, "user_profile/update_trial_application.html", {"form": form})
+    if request.method == "POST":
+        data = request.POST
+        form = ApplicationDetails(data)
+        if form.is_valid():
+            trial = get_object_or_404(Trial, pk=_id)
+            application = Application.objects.get(user=request.user, trial=trial)
+            details_of_application = DetailsOfApplication.objects.get(application=application)
+            success_url = '/user_profile/{}/'.format(request.user.id)
+            if int(data['weight']) <= trial.max_weight and int(data['weight']) >= trial.min_weight:
+                pass
+            else:
+                messages.error(request, "You fail the weight criteria for this Trial. Can't Update Details.")
+                return HttpResponseRedirect(success_url)
+            if int(data['height']) <= trial.max_height and int(data['height']) >= trial.min_height:
+                pass
+            else:
+                messages.error(request, "You fail the height criteria for this Trial. Can't Update Details.")
+                return HttpResponseRedirect(success_url)
+            details_of_application.why_you_should_be_selected = data['why_you_should_be_selected']
+            details_of_application.weight = data['weight']
+            details_of_application.height = data['height']
+            try:
+                disability = data['disability']
+                details_of_application.disability = True
+            except:
+                pass
+            details_of_application.disability_details = data['disability_details']
+            details_of_application.blood_group = data['blood_group']
+            details_of_application.save()
+            messages.success(request, "Successfully Updates Details of Application")
+            return HttpResponseRedirect(success_url)
+        else:
+            return render(request, "user_profile/update_trial_application.html", {"form": form})

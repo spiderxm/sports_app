@@ -2325,7 +2325,7 @@
                                                     <th scope="col" style="width:10% ">Update</th>
                                                     <th scope="col" style="width:10% ">Delete</th>
                                                     {% if user.id == id %}
-                                                        <th scope="col" style="width:10% ">Download Application</th>
+                                                        <th scope="col" style="width:10% ">Download</th>
                                                     {% endif %}
                                                 </tr>
                                                 </thead>
@@ -2348,19 +2348,19 @@
                                                         <td>
                                                             <a href="{% url "trial_application_info" application.trial.id %}"
                                                                style="text-decoration: none; color: #2bffc6">
-                                                                Details
+                                                                Detail of Application
                                                             </a>
                                                         </td>
                                                         <td>
                                                             <a href="{% url "update_application" application.trial.id %}"
                                                                style="text-decoration: none; color: #2bffc6">
-                                                                Update
+                                                                Update Application
                                                             </a>
                                                         </td>
                                                         <td>
                                                             <a href="{% url "delete_trial_application" application.trial.id %}"
                                                                style="text-decoration: none; color: #2bffc6">
-                                                                Delete
+                                                                Delete Application
                                                             </a>
                                                         </td>
                                                         {% if user.id == id %}
