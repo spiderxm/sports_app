@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 from django.shortcuts import render, HttpResponseRedirect, Http404, get_object_or_404
 from django.urls import reverse_lazy
 from .forms import AddTrial, ApplicationDetails
@@ -75,6 +75,24 @@ def add_trial(request):
             form = AddTrial(request.POST)
             if form.is_valid():
                 form.save()
+                users = CustomUser.objects.all()
+                emails = []
+                for user in users:
+                    emails.append(user.email)
+                data = form.cleaned_data
+                subject = "New " + data["title"]
+                message = f"Apply To New Trial\n" \
+                          f"Sport : {data['sport']}\n" \
+                          f"State : {data['state']}\n" \
+                          f"Venue : {data['venue']}\n" \
+                          f"Date : {str(data['date'])}\n" \
+                          f"Time : {str(data['time'])}\n" \
+                          f"Description : {str(data['description'])}"
+                sender_email = 'sports.registraion@gmail.com'
+                send_mail(subject,
+                          message,
+                          sender_email,
+                          emails)
                 success_url = reverse_lazy("home:trials")
                 messages.success(request, "Trial added Successfully")
                 return HttpResponseRedirect(success_url)
