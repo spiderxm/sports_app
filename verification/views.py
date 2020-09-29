@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from verification.forms import Register, Login
@@ -6,7 +7,6 @@ from django.contrib.auth import login as auth_login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-import datetime
 import requests
 
 
@@ -26,7 +26,9 @@ def login(request):
                 auth_login(request, user)
                 if request.GET.get("next"):
                     return redirect(request.GET.get("next"))
-                return HttpResponseRedirect(reverse_lazy('home:home'))
+                messages.success(request,
+                                 request.user.first_name + " " + request.user.last_name + " You Have LoggedIn Successfully.")
+                return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
             else:
                 context = {
                     "form": Login(request.POST),

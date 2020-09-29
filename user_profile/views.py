@@ -77,6 +77,7 @@ def upload_photo(request):
         messages.success(request, f"{request.user.first_name} you have successfully updated your image")
         return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
 
+
 @login_required
 def add_achievement(request):
     if request.method == "GET":
@@ -183,8 +184,9 @@ def delete_trial_application(request, _id):
             try:
                 details_of_application.delete()
                 application.delete()
-                messages.success(request, f"{request.user.first_name} you have successfully deleted your application")
-                return HttpResponseRedirect(reverse_lazy("home:home"))
+                messages.success(request,
+                                 f"{request.user.first_name} {request.user.last_name} you have successfully deleted your application")
+                return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))
             except:
                 messages.error(request, f"{request.user.first_name} you have successfully deleted your application")
                 return HttpResponseRedirect(reverse_lazy("home:home"))
