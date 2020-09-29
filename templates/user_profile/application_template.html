@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Application Form </title>
+    <meta charset='UTF-8'>
+    <style>
+        body {
+            margin: 50px;
+            font-family: monospace;
+        }
+
+        table {
+            table-layout: fixed;
+            border-radius: 3px;
+            width: 100%;
+            border-width: 1px;
+            border-color: black;
+            border-style: solid;
+
+        }
+
+        th, td {
+            border-width: 1px;
+            border-color: black;
+            border-style: solid;
+            border-radius: 3px;
+        }
+
+        div {
+            padding: 5px;
+            border-width: 1px;
+            border-color: black;
+            border-style: solid;
+        }
+
+        .xyz {
+            border-color: black;
+            border-width: 3px;
+            border-style: solid;
+        }
+
+        .cent {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="xyz" style="border-radius: 10px">
+    <div class="cent"><h2> Sports Trial Application Form </h2></div>
+    <div>Date and Time of Application: {{ application.date }}</div>
+    <div style="margin: 1rem 0rem">
+        <h4>Personal Information : </h4>
+        <div>Name : {{ user.first_name }} {{ user.last_name }}</div>
+        <div>Email-Id : {{ user.email }}</div>
+        <div>State : {{ user.state }} </div>
+        <div>Age : {{ user.age }}</div>
+        <div>Gender : {{ user.gender }}</div>
+    </div>
+    <div style="margin: 1rem 0rem">
+        <h4>Trail Details : {{ trial.title }}</h4>
+        <div>Venue : {{ trial.venue }}</div>
+        <div>Sport : {{ trial.sport }}</div>
+        <div>State : {{ trial.state }} </div>
+        <div>Date : {{ trial.date }}</div>
+        <div>Time : {{ trial.time }}</div>
+        <div>Age Group : {{ trial.age_group }}</div>
+        <div>Number of selections to be made :{{ trial.no_of_selections }}</div>
+    </div>
+    <div style="margin: 1rem 0px">
+        <h4>Your application to the Trial</h4>
+        <div>
+            Why you should be selected : {{ details_of_application.why_you_should_be_selected }}
+        </div>
+        <div>
+            Height :{{ details_of_application.height }}cm
+        </div>
+        <div>
+            Weight : {{ details_of_application.weight }}kg
+        </div>
+        {% if details_of_application.disability %}
+            <div>
+                Disability : Yes
+            </div>
+            <div>
+                Details of Disability : {{ details_of_application.disability_details }}
+            </div>
+        {% else %}
+            <div>
+                Disability : No
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="xyz" style="margin-top: 25rem; border-radius: 10px">
+    {% if achievements %}
+        <div>
+            <h4> Achievements : </h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th> Tournament</th>
+                    <th> Date</th>
+                    <th> Venue</th>
+                    <th> Event</th>
+                    <th> Medal Won</th>
+                </tr>
+                </thead>
+                <tbody class="cent">
+                {% for achievement in achievements %}
+                    <tr>
+                        <td>{{ achievement.Name_of_Tournament }}</td>
+                        <td>{{ achievement.date }}</td>
+                        <td>{{ achievement.Event }}</td>
+                        <td>{{ achievement.Venue }}</td>
+                        <td>{{ achievement.Medal_won }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    {% endif %}
+    <div>
+        <h4> Declaration : </h4>
+        I hereby declare that the information furnished by me in this Registration Form is true and correct.
+        I have not concealed any information.
+        However, if any information furnished herein is incorrect or incomplete,
+        I understand that I am liable to appropriate action and I also agree to forego my registration.
+    </div>
+    <div>
+        <h4> Note : </h4>
+        <ul>
+            <li>Bring all Your Certificates</li>
+            <li>Please pe present at the venue 15 minutes before the time of the Trial.</li>
+            <li>Bring proper documents (e.g Aadhar Card, Driving License) at the trial for verification.</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
