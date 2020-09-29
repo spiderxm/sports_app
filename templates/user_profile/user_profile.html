@@ -2316,9 +2316,16 @@
                                                     <th scope="col" style="width:20% ">Date</th>
                                                     <th scope="col" style="width:10% ">Sport</th>
                                                     <th scope="col" style="width:10% ">State</th>
-                                                    <th scope="col" style="width:20% ">Applied At</th>
+                                                    {% if user.id == id %}
+                                                        <th scope="col" style="width:10% ">Applied At</th>
+                                                    {% else %}
+                                                        <th scope="col" style="width:20% ">Applied At</th>
+                                                    {% endif %}
                                                     <th scope="col" style="width:10% ">Details</th>
                                                     <th scope="col" style="width:10% ">Delete</th>
+                                                    {% if user.id == id %}
+                                                        <th scope="col" style="width:10% ">Download Application</th>
+                                                    {% endif %}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -2349,6 +2356,14 @@
                                                                 Delete
                                                             </a>
                                                         </td>
+                                                        {% if user.id == id %}
+                                                            <td>
+                                                                <a href="{% url "download_application" application.trial.id %}"
+                                                                   style="text-decoration: none; color: #2bffc6">
+                                                                    Download Application
+                                                                </a>
+                                                            </td>
+                                                        {% endif %}
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>

@@ -1,10 +1,14 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, Http404, HttpResponseRedirect
+from django.template.loader import render_to_string
+
 from verification.models import CustomUser, ProfilePicture
 from user_profile.forms import Achievement, Certificate
 from django.urls import reverse_lazy
 from verification.models import user_achievements, Certificates, Application, DetailsOfApplication, Trial
 from django.contrib import messages
+import pdfcrowd
 
 
 def profile(request, _id):
@@ -201,3 +205,31 @@ def delete_trial_application(request, _id):
             return render(request, "user_profile/delete_trial_application.html")
         except:
             raise Http404("Page not found")
+
+
+@login_required
+def download_application(request, _id):
+    if request.method == "GET":
+        try:
+            trial = get_object_or_404(Trial, pk=_id)
+            application = Application.objects.get(user=request.user, trial=trial)
+            details_of_application = DetailsOfApplication.objects.get(application=application)
+            achievements = user_achievements.objects.all().filter(user_id=request.user.id)
+            certificates = Certificates.objects.all().filter(user_id=request.user.id)
+            client = pdfcrowd.HtmlToPdfClient('spiderxm', 'c2a76a628d51f71fb76b85b8808956c4')
+            response = HttpResponse(content_type='application/pdf')
+            response['Cache-Control'] = 'max-age=0'
+            response['Accept-Ranges'] = 'none'
+            response['Content-Disposition'] = 'attachment; filename="application.pdf"'
+            html = render_to_string(template_name="user_profile/application_template.html",
+                                    context={"trial": trial,
+                                             "application": application,
+                                             "achievements": achievements,
+                                             "details_of_application": details_of_application,
+                                             "certificates": certificates,
+                                             "user": request.user})
+            client.convertStringToStream(html, response)
+            return response
+        except pdfcrowd.Error:
+            messages.error(request, "There is a issue with api please try again later.")
+            return HttpResponseRedirect('/user_profile/{}/'.format(request.user.id))

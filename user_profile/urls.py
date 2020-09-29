@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from user_profile.views import profile, upload_photo, add_achievement, add_certificate, view_trial_application_details, \
-    delete_trial_application, delete_certificate, delete_achievement
+    delete_trial_application, delete_certificate, delete_achievement, download_application
 
 urlpatterns = [
     url(r'^(?P<_id>\d+)/$', profile, name="user_profile"),
@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^trial_application_delete/(?P<_id>\d+)/$', delete_trial_application, name="delete_trial_application"),
     url(r'^delete_achievement/(?P<_id>\d+)/$', delete_achievement, name="delete_achievement"),
     url(r'^delete_certificate/(?P<_id>\d+)/$', delete_certificate, name="delete_certificate"),
+    url(r'^download_application/(?P<_id>\d+)/$', download_application, name="download_application")
 ]
