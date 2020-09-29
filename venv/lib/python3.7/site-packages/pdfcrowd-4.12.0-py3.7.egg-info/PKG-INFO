@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: pdfcrowd
+Version: 4.12.0
+Summary: A client library for the Pdfcrowd API.
+Home-page: https://pdfcrowd.com/doc/api/
+Author: Pdfcrowd Team
+Author-email: support@pdfcrowd.com
+License: License :: OSI Approved :: MIT License
+Description: 
+        The Pdfcrowd API lets you easily convert between HTML, PDF and various image formats.
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
