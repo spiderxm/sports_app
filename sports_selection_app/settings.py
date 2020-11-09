@@ -83,11 +83,6 @@ WSGI_APPLICATION = 'sports_selection_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sports_data',
-        'HOST': '35.244.27.212',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': '4eBkh,qSB[bAX8gy',
     }}
 
 # Password validation
