@@ -212,7 +212,8 @@ def users_list(request):
         users = users.filter(state__state=state)
     if sport:
         users = users.filter(sport__sport=sport)
-    if request.user:
+    print(request.user)
+    if str(request.user) != 'AnonymousUser' and str(request.user) != 'None':
         users = users.exclude(email=request.user.email)
     context = {
         "users": users,
